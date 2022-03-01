@@ -14,6 +14,7 @@ Variables
   --Dark-Gray: hsl(0, 0%, 55%);
   --Very-Dark-Gray: hsl(0, 0%, 41%);
   --Space-Blue: #2c365e;
+  --Dark-Blue: #171d30;
 }
 
 /* ===
@@ -28,21 +29,26 @@ Global Styles
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  text-align: center;
+  /* text-align: center; */
 }
 main {
   color: white;
 }
 button {
   text-decoration: none;
-  padding: 1em;
+  padding: 1em 1.5em;
   border-style: none;
+  cursor: pointer;
 }
 ul li {
   list-style-type: none;
 }
 h1 {
   font-size: 1.5rem;
+  text-align: center;
+}
+h2 {
+  text-align: center;
 }
 a {
   text-decoration: none;
@@ -61,6 +67,8 @@ header {
   background-color: var(--Space-Blue);
   color: var(--White);
   padding: 2em 3em;
+  position: fixed;
+  z-index: 99;
 }
 /* .search-section {
   width: 100%;
@@ -89,6 +97,7 @@ header {
 .search-bar {
   width: 90%;
   min-width: 12em;
+  max-width: 40em;
   border-radius: 25px;
   padding: 0.7em;
   margin-bottom: 1em;
@@ -109,6 +118,7 @@ header {
 }
 .search-div {
   width: 80%;
+  text-align: center;
 }
 
 .search-div h2 {
@@ -121,31 +131,72 @@ header {
 }
 #search-btn {
   display: block;
-  /* position: absolute;
-  top: 0.2em;
-  right: 2.7em; */
   border-radius: 25px;
   background-color: #2c365e;
   color: white;
   margin: 0 auto;
 }
 
+main {
+  background-color: var(--Dark-Blue);
+  padding-top: 88px;
+}
 .movie-list-section {
-  background-color: #171d30;
-  padding: 2em;
-}.movie-list-section > h2{
-   margin-bottom: 2em;
+  /* width: 85%;
+  margin: 1em auto; */
+}
+.movie-list-section > h2 {
+  margin: 2em 0;
 }
 .movie-list {
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
-.movie-card {
+.movie-card,
+.movie-card-aside {
+  display: flex;
   border: 1px solid white;
-  max-width: 20em;
-  height: 20em;
-  padding: 2em;
+  height: 10em;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.movie-card img {
+  height: 100%;
+}
+.movie-info {
+  padding: 2em 1em;
+  background-color: rgb(15, 9, 5);
+  width: 100%;
+}
+.movie-overview {
+  display: none;
+}
+.top-rated-movies-aside {
+  border: 1px solid white;
+  width: 85%;
+  margin: 0 auto;
+}
+.top-rated-movies-aside > h2 {
+  margin: 2em 0;
+}
+.top-rated-list {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  /* flex-wrap: wrap; */
+  overflow-x: auto;
+}
+.movie-card-aside {
+  display: block;
+  height: 15em;
+  width: 10em;
+}
+.movie-card-aside img {
+  width: 100%;
 }
