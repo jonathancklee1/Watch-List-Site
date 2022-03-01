@@ -94,7 +94,7 @@ header {
 .banner {
   width: 100%;
   min-height: calc(100vh - 88px);
-  background-image: url(./images/movies-cover.jpg);
+  background-image: url(./images/anime-cover.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   display: grid;
