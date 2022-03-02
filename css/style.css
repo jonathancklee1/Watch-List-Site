@@ -24,19 +24,21 @@ Global Styles
 *,
 *::before,
 *::after {
-  /* font-family: "Alata", sans-serif; */
-  font-family: "Josefin Sans", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* text-align: center; */
 }
+body {
+  font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+}
+
 main {
   color: white;
 }
 button {
   text-decoration: none;
-  padding: 1em 1.5em;
+  padding: 1em 1em;
   border-style: none;
   cursor: pointer;
 }
@@ -45,15 +47,17 @@ ul li {
 }
 h1 {
   font-size: 1.5rem;
-  text-align: center;
 }
 h2 {
-  text-align: center;
 }
 a {
   text-decoration: none;
   color: white;
   cursor: pointer;
+}
+i {
+  color: white;
+  font-size: 1.2rem;
 }
 
 /* ===
@@ -99,6 +103,7 @@ header {
   background-repeat: no-repeat;
   display: grid;
   place-items: center;
+  position: relative;
 }
 .search-bar {
   width: 90%;
@@ -143,6 +148,15 @@ header {
   margin: 0 auto;
 }
 
+.nav-down-btn {
+  position: absolute;
+  border-radius: 50px;
+  padding: 0;
+  height: 3em;
+  width: 3em;
+  bottom: 4em;
+  background-color: #171d30;
+}
 main {
   background-color: var(--Dark-Blue);
   padding-top: 88px;
@@ -153,6 +167,14 @@ main {
 }
 .movie-list-section > h2 {
   margin: 2em 0;
+}
+.movie-results {
+  display: flex;
+  flex-direction: column;
+}
+.movie-list-section {
+  order: 2;
+  margin-bottom: 4em;
 }
 .movie-list {
   width: 100%;
@@ -168,40 +190,50 @@ main {
   border: 1px solid white;
   height: 10em;
   width: 100%;
-  margin-bottom: 1em;
+  text-align: left;
+  color: black;
 }
 .movie-card img {
   height: 100%;
 }
 .movie-info {
   padding: 2em 1em;
-  background-color: rgb(15, 9, 5);
+  background-color: rgb(250, 250, 250);
   width: 100%;
 }
 .movie-overview {
   display: none;
+  /* height: 100%; */
 }
 .top-rated-movies-aside {
   border: 1px solid white;
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
+  order: 1;
 }
 .top-rated-movies-aside > h2 {
   margin: 2em 0;
 }
 .top-rated-list {
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
-  /* flex-wrap: wrap; */
   overflow-x: auto;
+  white-space: nowrap;
+  /* height: 20em; */
 }
 .movie-card-aside {
   display: block;
-  height: 15em;
-  width: 10em;
+  /* height: 15em; */
+  width: 8em;
+  min-width: 8rem;
+  overflow: hidden;
+  background-color: white;
+  margin-right: 0.3em;
+}
+.movie-card-aside .movie-info {
+  padding: 1em 0.5em;
 }
 .movie-card-aside img {
   width: 100%;

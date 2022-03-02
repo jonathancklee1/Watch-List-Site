@@ -5,9 +5,12 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="./css/style.css">
+   <script src="https://kit.fontawesome.com/93f4c43aa5.js" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+   <link rel="stylesheet" href="./css/style.css">
+
    <title>MyWatchList - Movies</title>
 </head>
 
@@ -40,6 +43,8 @@
                      <button id="search-btn">Search</button>
                   </form>
                </div>
+
+               <button class="nav-down-btn"><i class="fa fa-arrow-down"></i></button>
             </div>
 
          </div>
@@ -61,14 +66,27 @@
                   </div>
 
                </div>
+               <div class="movie-card">
+                  <img src="./img/Dabbing chica.jpg" alt="">
+                  <div class="movie-info">
+                     <h3>Shutter Island</h3>
+                     <p>Rating: 6.9 </p>
+                     <p>Released on 12th September 2000</p>
+                     <div class="movie-overview">
+                        <p class="blurb"></p>
+                        <a href="#">See More</a>
+                     </div>
+                  </div>
 
+               </div>
 
             </div>
          </section>
          <aside class="top-rated-movies-aside">
             <h2>Top Rated Movies</h2>
-            <div class="top-rated-list">
+            <ul class="top-rated-list">
                <div class="movie-card-aside">
+
                   <img src="./img/Dabbing chica.jpg" alt="">
                   <div class="movie-info">
                      <h3>Shutter Island</h3>
@@ -104,7 +122,7 @@
                      <p class="blurb"></p>
                   </div>
                </div>
-            </div>
+            </ul>
 
          </aside>
 
@@ -112,7 +130,9 @@
 
    </main>
 
-   <footer class="footer"></footer>
+   <footer class="footer">
+      <div class="copyright">© 2022 Jonathan Lee. All rights reserved.</div>
+   </footer>
    <script src="./js/index.js"></script>
 </body>
 
