@@ -15,6 +15,7 @@ Variables
   --Very-Dark-Gray: hsl(0, 0%, 41%);
   --Space-Blue: #2c365e;
   --Dark-Blue: #171d30;
+  --Dark-Blue-Section: #242b42;
 }
 
 /* ===
@@ -64,25 +65,27 @@ i {
 Global Classes
 === */
 
+/* Nav */
 header {
+  width: 100%;
+  background-color: var(--Space-Blue);
+  position: fixed;
+  z-index: 99;
+  color: var(--White);
+  top: 0;
+}
+.header-container {
+  /* max-width: 1400px; */
+  width: 85%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  background-color: var(--Space-Blue);
-  color: var(--White);
-  padding: 2em 3em;
-  position: fixed;
-  z-index: 99;
+  margin: 0 auto;
+  padding: 2em 0;
 }
-/* .search-section {
-  width: 100%;
-  min-height: 100vh;
-} */
 
 .nav-bar ul {
   display: none;
-  /* display: flex; */
   align-items: center;
   justify-content: space-between;
 }
@@ -94,7 +97,6 @@ header {
   width: 100vw;
   height: 100vh;
   z-index: 99;
-  /* display: none; */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -137,6 +139,8 @@ header {
   margin-right: 1em;
   font-size: 1.2rem;
 }
+
+/* Banner */
 .banner {
   width: 100%;
   min-height: calc(100vh - 88px);
@@ -199,6 +203,8 @@ header {
   bottom: 4em;
   background-color: #171d30;
 }
+
+/* Main */
 main {
   background-color: var(--Dark-Blue);
   padding-top: 88px;
@@ -229,26 +235,26 @@ main {
 .movie-card,
 .movie-card-aside {
   display: flex;
-  border: 1px solid white;
   height: 10em;
   width: 100%;
   text-align: left;
   color: black;
+  margin-bottom: 0.5em;
 }
-.movie-card img {
+.poster img {
   height: 100%;
 }
 .movie-info {
   padding: 2em 1em;
-  background-color: rgb(250, 250, 250);
+  background-color: var(--Dark-Blue-Section);
   width: 100%;
+  color: white;
 }
 .movie-overview {
   display: none;
   /* height: 100%; */
 }
 .top-rated-movies-aside {
-  border: 1px solid white;
   width: 100%;
   margin: 0 auto;
   order: 1;
@@ -259,6 +265,7 @@ main {
 .top-rated-list {
   width: 100%;
   margin: 0 auto;
+  padding: 0 2em;
   display: flex;
   align-items: center;
   overflow-x: auto;
@@ -267,17 +274,74 @@ main {
 }
 .movie-card-aside {
   display: block;
-  /* height: 15em; */
   width: 8em;
   min-width: 8em;
   overflow: hidden;
-  /* background-color: white; */
   margin-right: 0.3em;
+  color: white;
 }
 .movie-card-aside .movie-info {
   padding: 1em 0.5em;
 }
 .movie-card-aside img {
   width: 100%;
-  /* height: 8em; */
+}
+
+@media (min-width: 800px) {
+  .movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 5px;
+    width: 85%;
+  }
+  .movie-card {
+    max-width: 15em;
+    flex-direction: column;
+    height: auto;
+    margin: 0.5em;
+    margin-top: 0;
+  }
+  .poster {
+    height: calc(15em / 3 * 4);
+  }
+  .poster img {
+    width: 100%;
+  }
+  .movie-info {
+    display: flex;
+    padding: 1em;
+    flex-wrap: wrap;
+    background-color: var(--Dark-Blue-Section);
+  }
+  .movie-title {
+    width: 100%;
+    margin-bottom: 0.3em;
+  }
+  .duration {
+    width: 49%;
+  }
+  .release-year {
+    width: 49%;
+  }
+  .movie-results {
+    flex-direction: row;
+  }
+  .movie-list-section {
+    order: 1;
+    width: 80%;
+  }
+  .top-rated-movies-aside {
+    width: 20%;
+    background-color: var(--Dark-Blue-Section);
+  }
+  .top-rated-movies-aside h2 {
+    text-align: left;
+    margin-left: 48px;
+  }
+  .top-rated-list {
+    display: block;
+  }
+  .movie-card-aside {
+    margin: 0.5em 1em;
+  }
 }
