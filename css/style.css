@@ -246,6 +246,8 @@ main {
   text-align: left;
   color: black;
   margin-bottom: 0.5em;
+  cursor: pointer;
+  overflow: hidden;
 }
 .poster img {
   height: 100%;
@@ -307,6 +309,7 @@ main {
     height: auto;
     margin: 0.5em;
     margin-top: 0;
+    position: relative;
   }
   .poster {
     height: calc(15em / 3 * 4);
@@ -329,6 +332,31 @@ main {
   }
   .release-year {
     width: 49%;
+  }
+  .movie-overview {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    padding: 1em;
+    background-color: #171d30e3;
+    color: white;
+    line-height: 1.4rem;
+    transform: translateY(100%);
+    display: flex;
+    transition: transform 0.4s ease-in;
+  }
+  .movie-card:hover .movie-overview {
+    transform: translateY(0%);
+  }
+  .movie-overview a {
+    position: absolute;
+    bottom: 1em;
+    font-weight: bold;
   }
   .movie-results {
     flex-direction: row;
