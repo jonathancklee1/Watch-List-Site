@@ -89,6 +89,11 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+
+.nav-bar ul a:hover,
+.nav-bar ul a:focus {
+  border-bottom: 2px solid white;
+}
 .hamburger-icon {
   display: block;
 }
@@ -127,6 +132,7 @@ header {
 #mobile-close-icon {
   float: right;
 }
+
 @media (min-width: 765px) {
   .nav-bar ul {
     display: flex;
@@ -136,7 +142,7 @@ header {
   }
 }
 .nav-bar ul li {
-  margin-right: 1em;
+  margin-right: 2em;
   font-size: 1.2rem;
 }
 
@@ -274,11 +280,12 @@ main {
 }
 .movie-card-aside {
   display: block;
-  width: 8em;
-  min-width: 8em;
+  max-width: 9em;
+  min-width: 9em;
   overflow: hidden;
   margin-right: 0.3em;
   color: white;
+  height: auto;
 }
 .movie-card-aside .movie-info {
   padding: 1em 0.5em;
@@ -334,14 +341,16 @@ main {
     width: 20%;
     background-color: var(--Dark-Blue-Section);
   }
+
   .top-rated-movies-aside h2 {
-    text-align: left;
-    margin-left: 48px;
+    margin: inherit 1em;
   }
   .top-rated-list {
     display: block;
   }
   .movie-card-aside {
-    margin: 0.5em 1em;
+    margin: 0.5em auto;
+    max-width: 10em;
+    min-width: 6em;
   }
 }
