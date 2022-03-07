@@ -91,9 +91,11 @@ header {
 }
 
 .nav-bar ul a:hover,
-.nav-bar ul a:focus {
+.nav-bar ul a:focus,
+.current {
   border-bottom: 2px solid white;
 }
+
 .hamburger-icon {
   display: block;
 }
@@ -268,15 +270,15 @@ main {
   display: none;
   /* height: 100%; */
 }
-.top-rated-movies-aside {
+.upcoming-movies-aside {
   width: 100%;
   margin: 0 auto;
   order: 1;
 }
-.top-rated-movies-aside > h2 {
+.upcoming-movies-aside > h2 {
   margin: 2em 0;
 }
-.top-rated-list {
+.upcoming-list {
   width: 100%;
   margin: 0 auto;
   padding: 0 2em;
@@ -302,15 +304,15 @@ main {
   width: 100%;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 810px) {
   .movie-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
     gap: 5px;
     width: 85%;
   }
   .movie-card {
-    max-width: 15em;
+    max-width: 14em;
     flex-direction: column;
     height: auto;
     margin: 0.5em;
@@ -318,7 +320,7 @@ main {
     position: relative;
   }
   .poster {
-    height: calc(15em / 3 * 4.3);
+    height: calc(14em / 3 * 4.3);
   }
   .poster img {
     width: 100%;
@@ -343,6 +345,7 @@ main {
     align-items: flex-end;
   }
   .rating {
+    font-weight: bold;
     text-align: right;
     justify-content: flex-end;
   }
@@ -383,22 +386,36 @@ main {
   }
   .movie-list-section {
     order: 1;
-    width: 80%;
+    width: 78%;
   }
-  .top-rated-movies-aside {
-    width: 20%;
+  .upcoming-movies-aside {
+    width: 22%;
+    min-width: 270px;
     background-color: var(--Dark-Blue-Section);
   }
 
-  .top-rated-movies-aside h2 {
+  .upcoming-movies-aside h2 {
     margin: inherit 1em;
   }
-  .top-rated-list {
+  .upcoming-list {
     display: block;
+    max-height: 2000px;
+    overflow-y: scroll;
   }
   .movie-card-aside {
-    margin: 0.5em auto;
-    max-width: 10em;
-    min-width: 6em;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+  }
+  .movie-card-aside > img {
+    width: 110px;
+    height: calc(110px / 3 * 4.3);
+    float: left;
+  }
+  .movie-card-aside h3 {
+    width: 100%;
+    white-space: normal;
+    font-size: 1rem;
   }
 }
