@@ -259,8 +259,12 @@ main {
   cursor: pointer;
   overflow: hidden;
 }
+.poster {
+  min-width: 130px;
+}
 .poster img {
   height: 100%;
+  width: 130px;
 }
 .movie-info {
   display: flex;
@@ -290,6 +294,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 400px;
   }
 }
 .blurb {
@@ -340,9 +345,14 @@ main {
 .movie-card-aside .movie-info {
   height: 88px;
 }
+.movie-card-aside > img,
+.movie-card img {
+  color: var(--White);
+}
+
 .movie-card-aside > img {
   width: 100%;
-  height: calc(140px / 3 * 4.3);
+  height: 100%;
   float: left;
 }
 .movie-card-aside h3 {
@@ -373,6 +383,7 @@ main {
     position: relative;
   }
   .poster {
+    width: auto;
     height: calc(14em / 3 * 4.3);
   }
   .poster img {
@@ -389,6 +400,7 @@ main {
   .movie-title {
     width: 100%;
     margin-bottom: 0.3em;
+    font-size: 0.9rem;
   }
   .duration,
   .release-year,
@@ -452,7 +464,8 @@ main {
   }
   .upcoming-list {
     display: block;
-    max-height: 2000px;
+    min-height: 500px;
+    max-height: 1500px;
     overflow-y: scroll;
   }
   .movie-card-aside {
@@ -474,4 +487,11 @@ main {
   .dot {
     margin-right: 0;
   }
+}
+
+/* Footer */
+.footer {
+  background-color: var(--Space-Blue);
+  padding: 3em;
+  color: var(--White);
 }

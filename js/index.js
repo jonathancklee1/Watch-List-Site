@@ -5,6 +5,9 @@ const navDownBtn = document.querySelector(".nav-down-btn");
 const movieListSection = document.querySelector(".movie-list-section");
 const movieList = document.querySelector(".movie-list");
 const upcomingList = document.querySelector(".upcoming-list");
+const searchBar = document.querySelector(".search-bar");
+const searchBtn = document.getElementById("search-btn");
+const form = document.querySelector(".search-func");
 
 const API_KEY = "api_key=42c15f29217106b8f3f7867104c1fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -14,7 +17,7 @@ const ASIDE_API_URL =
   BASE_URL +
   "/movie/upcoming?primary_release_year=2022&sort_by=popularity.desc&" +
   API_KEY;
-
+const SEARCH_API_URL = BASE_URL + "/search/movie?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Function Invocation
@@ -36,16 +39,31 @@ navDownBtn.addEventListener("click", () => {
     inline: "nearest",
   });
 });
+searchBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const searchTerm = searchBar.value;
+  if (searchTerm) {
+    getMovies(SEARCH_API_URL + "&query=" + searchTerm);
+  } else {
+    getMovies(API_URL);
+  }
+  // window.scrollBy(0, 901);
+   movieListSection.scrollIntoView({
+     behavior: "smooth",
+     block: "start",
+     inline: "nearest",
+   });
+});
 
 // Functions
 function getMovies(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.results);
+      // console.log(data.results);
       displayMainMovies(data.results);
     })
-    .catch((err) => alert(err));
+    .catch((err) => alert("getMovies " + err));
 }
 function getAsideMovies(url) {
   fetch(url)
@@ -54,29 +72,40 @@ function getAsideMovies(url) {
       console.log(data.results);
       displayAsideMovies(data.results);
     })
-    .catch((err) => alert(err));
+    .catch((err) => alert("Aside" + err));
 }
 
 function displayMainMovies(data) {
-  data.forEach((movie) => {
-    const { id } = movie;
-    fetch(`https://api.themoviedb.org/3/movie/${id}?${API_KEY}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const {
-          title,
-          poster_path,
-          vote_average,
-          overview,
-          release_date,
-          runtime,
-        } = data;
-        const movieCard = document.createElement("div");
-        const mRating = document.querySelector(".rating");
-        movieCard.classList.add("movie-card");
-        movieCard.innerHTML = `
+  movieList.innerHTML = "";
+  const errorDiv = document.createElement("div");
+  const newErrorDiv = document.querySelector(".error-div");
+  if (newErrorDiv) newErrorDiv.remove();
+  if (data.length == 0) {
+    const searchTerm = searchBar.value;
+
+    errorDiv.innerHTML = `<h1>No results for "${searchTerm}"</h1>`;
+    errorDiv.classList.add("error-div");
+    movieListSection.appendChild(errorDiv);
+    // return;
+  } else {
+    data.forEach((movie) => {
+      const { id } = movie;
+      fetch(`https://api.themoviedb.org/3/movie/${id}?${API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const {
+            title,
+            poster_path,
+            vote_average,
+            overview,
+            release_date,
+            runtime,
+          } = data;
+          const movieCard = document.createElement("div");
+          movieCard.classList.add("movie-card");
+          movieCard.innerHTML = `
                   <div class="poster">
-                    <img src="${IMG_URL + poster_path}" alt="">
+                    <img src="${IMG_URL + poster_path}" alt="Image Unavailable">
                   </div>
                   <div class="movie-info">
                     <h3 class="movie-title">${title}</h3>
@@ -91,10 +120,13 @@ function displayMainMovies(data) {
                     <p class="blurb">${overview}</p>
                     <a href="#">Click To See More</a>
                   </div>`;
-        movieList.appendChild(movieCard);
-        // setColor(vote_average);
-      });
-  });
+          movieList.appendChild(movieCard);
+        })
+        .catch((err) => {
+          alert("Detail error" + err);
+        });
+    });
+  }
 }
 function displayAsideMovies(data) {
   data.forEach((movie) => {
