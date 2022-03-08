@@ -16,6 +16,7 @@ Variables
   --Space-Blue: #2c365e;
   --Dark-Blue: #171d30;
   --Dark-Blue-Section: #242b42;
+  --Transp-Blue: #171d30e3;
 }
 
 /* ===
@@ -35,7 +36,7 @@ body {
 }
 
 main {
-  color: white;
+  color: var(--White);
 }
 button {
   text-decoration: none;
@@ -53,11 +54,11 @@ h1 {
 
 a {
   text-decoration: none;
-  color: white;
+  color: var(--White);
   cursor: pointer;
 }
 i {
-  color: white;
+  color: var(--White);
   font-size: 1.2rem;
 }
 
@@ -93,7 +94,7 @@ header {
 .nav-bar ul a:hover,
 .nav-bar ul a:focus,
 .current {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--White);
 }
 
 .hamburger-icon {
@@ -198,13 +199,13 @@ header {
   display: block;
   border-radius: 25px;
   background-color: #2c365e;
-  color: white;
+  color: var(--White);
   margin: 0 auto;
   font-weight: bold;
 }
 #search-btn:hover {
   color: #2c365e;
-  background-color: white;
+  background-color: var(--White);
 }
 .nav-down-btn {
   position: absolute;
@@ -218,6 +219,7 @@ header {
 .nav-down-btn:hover {
   background-color: #4a5881;
 }
+
 /* Main */
 main {
   background-color: var(--Dark-Blue);
@@ -261,14 +263,48 @@ main {
   height: 100%;
 }
 .movie-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   padding: 2em 1em;
   background-color: var(--Dark-Blue-Section);
   width: 100%;
-  color: white;
+  color: var(--White);
+}
+.movie-title {
+  width: 100%;
+}
+.duration,
+.release-year,
+.dot {
+  margin-right: 2em;
 }
 .movie-overview {
   display: none;
-  /* height: 100%; */
+  color: var(--White);
+  background-color: var(--Dark-Blue-Section);
+  padding: 1em;
+}
+@media (min-width: 540px) {
+  .movie-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+.blurb {
+  display: -webkit-box;
+  max-width: 500px;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #666;
+  display: inline-block;
 }
 .upcoming-movies-aside {
   width: 100%;
@@ -286,7 +322,6 @@ main {
   align-items: center;
   overflow-x: auto;
   white-space: nowrap;
-  /* height: 20em; */
 }
 .movie-card-aside {
   display: block;
@@ -294,16 +329,34 @@ main {
   min-width: 9em;
   overflow: hidden;
   margin-right: 0.3em;
-  color: white;
+  color: var(--White);
   height: auto;
+  width: 100%;
+  max-width: 120px;
 }
 .movie-card-aside .movie-info {
   padding: 1em 0.5em;
 }
-.movie-card-aside img {
-  width: 100%;
+.movie-card-aside .movie-info {
+  height: 88px;
 }
-
+.movie-card-aside > img {
+  width: 100%;
+  height: calc(140px / 3 * 4.3);
+  float: left;
+}
+.movie-card-aside h3 {
+  width: 100%;
+  white-space: normal;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+}
+.red {
+  color: rgb(177, 8, 8);
+}
+.green {
+  color: rgb(5, 173, 5);
+}
 @media (min-width: 810px) {
   .movie-list {
     display: grid;
@@ -327,6 +380,7 @@ main {
   }
   .movie-info {
     display: flex;
+    align-items: center;
     padding: 1em;
     flex-wrap: wrap;
     background-color: var(--Dark-Blue-Section);
@@ -339,10 +393,13 @@ main {
   .duration,
   .release-year,
   .rating {
-    width: 33%;
+    margin-right: 0;
+    width: 32%;
     display: flex;
-
     align-items: flex-end;
+  }
+  .release-year {
+    justify-content: flex-end;
   }
   .rating {
     font-weight: bold;
@@ -359,19 +416,15 @@ main {
     height: 100%;
     z-index: 10;
     padding: 1em;
-    background-color: #171d30e3;
-    color: white;
+    background-color: var(--Transp-Blue);
     line-height: 1.4rem;
     transform: translateY(100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     transition: transform 0.4s ease-in;
   }
   .blurb {
     display: -webkit-box;
     max-width: 200px;
-    -webkit-line-clamp: 16;
+    -webkit-line-clamp: 15;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -417,5 +470,8 @@ main {
     width: 100%;
     white-space: normal;
     font-size: 1rem;
+  }
+  .dot {
+    margin-right: 0;
   }
 }

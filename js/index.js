@@ -11,7 +11,9 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const MAIN_API_URL =
   BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
 const ASIDE_API_URL =
-  BASE_URL + "/movie/upcoming?sort_by=popularity.desc&" + API_KEY;
+  BASE_URL +
+  "/movie/upcoming?primary_release_year=2022&sort_by=popularity.desc&" +
+  API_KEY;
 
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
@@ -70,6 +72,7 @@ function displayMainMovies(data) {
           runtime,
         } = data;
         const movieCard = document.createElement("div");
+        const mRating = document.querySelector(".rating");
         movieCard.classList.add("movie-card");
         movieCard.innerHTML = `
                   <div class="poster">
@@ -77,15 +80,19 @@ function displayMainMovies(data) {
                   </div>
                   <div class="movie-info">
                     <h3 class="movie-title">${title}</h3>
-                    <p class="duration">${runtime + " mins"}</p>
+                    <p class="duration">${runtime + "m"}</p>
+                    <span class="dot"></span>
                     <p class="release-year">${release_date.substring(0, 4)}</p>
-                    <p class="rating">${vote_average}</p>
+                    <p class="rating ${setColor(
+                      vote_average
+                    )}">${vote_average}</p>
                   </div>
                   <div class="movie-overview">
                     <p class="blurb">${overview}</p>
                     <a href="#">Click To See More</a>
                   </div>`;
         movieList.appendChild(movieCard);
+        // setColor(vote_average);
       });
   });
 }
@@ -95,20 +102,24 @@ function displayAsideMovies(data) {
     fetch(`https://api.themoviedb.org/3/movie/${id}?${API_KEY}`)
       .then((res) => res.json())
       .then((data) => {
-        const { title, poster_path, vote_average } = data;
+        const { title, poster_path, release_date } = data;
         const movieAsideLi = document.createElement("li");
         const movieAsideCard = document.createElement("div");
         movieAsideCard.classList.add("movie-card-aside");
-        movieAsideCard.innerHTML = `
-                  
+        movieAsideCard.innerHTML = `                 
                     <img src="${IMG_URL + poster_path}" alt="">
                     <div class="movie-info">
                       <h3>${title}</h3>
+                      <p>${release_date}</p>
                     </div>
-                  
                `;
         movieAsideLi.appendChild(movieAsideCard);
         upcomingList.appendChild(movieAsideLi);
       });
   });
+}
+
+function setColor(rating) {
+  if (rating < 5) return "red";
+  return "green";
 }
