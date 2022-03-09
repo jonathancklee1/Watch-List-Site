@@ -15,7 +15,7 @@ const MAIN_API_URL =
   BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
 const ASIDE_API_URL =
   BASE_URL +
-  "/movie/upcoming?primary_release_year=2022&sort_by=popularity.desc&" +
+  "/movie/now_playing?primary_release_year=2022&language=en-US&" +
   API_KEY;
 const SEARCH_API_URL = BASE_URL + "/search/movie?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
@@ -47,15 +47,15 @@ searchBtn.addEventListener("click", (e) => {
   } else {
     getMovies(API_URL);
   }
-  // window.scrollBy(0, 901);
-   movieListSection.scrollIntoView({
-     behavior: "smooth",
-     block: "start",
-     inline: "nearest",
-   });
+  movieListSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
+  });
 });
 
 // Functions
+// Retrieve movies from TMDB API
 function getMovies(url) {
   fetch(url)
     .then((res) => res.json())
@@ -65,6 +65,7 @@ function getMovies(url) {
     })
     .catch((err) => alert("getMovies " + err));
 }
+
 function getAsideMovies(url) {
   fetch(url)
     .then((res) => res.json())
@@ -76,20 +77,21 @@ function getAsideMovies(url) {
 }
 
 function displayMainMovies(data) {
+  // Reset display
   movieList.innerHTML = "";
   const errorDiv = document.createElement("div");
   const newErrorDiv = document.querySelector(".error-div");
   if (newErrorDiv) newErrorDiv.remove();
+  // Check if search result is empty
   if (data.length == 0) {
     const searchTerm = searchBar.value;
-
     errorDiv.innerHTML = `<h1>No results for "${searchTerm}"</h1>`;
     errorDiv.classList.add("error-div");
     movieListSection.appendChild(errorDiv);
-    // return;
   } else {
     data.forEach((movie) => {
       const { id } = movie;
+      // Retrieve movie details for targeted movie
       fetch(`https://api.themoviedb.org/3/movie/${id}?${API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
@@ -121,6 +123,11 @@ function displayMainMovies(data) {
                     <a href="#">Click To See More</a>
                   </div>`;
           movieList.appendChild(movieCard);
+          // Set localstorage for movie id for details page
+          movieCard.addEventListener("click", () => {
+            localStorage.setItem("movieId", id);
+            window.location.href = "details.html";
+          });
         })
         .catch((err) => {
           alert("Detail error" + err);
@@ -151,6 +158,7 @@ function displayAsideMovies(data) {
   });
 }
 
+// Set visual color for movie rating
 function setColor(rating) {
   if (rating < 5) return "red";
   return "green";

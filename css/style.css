@@ -14,6 +14,7 @@ Variables
   --Dark-Gray: hsl(0, 0%, 55%);
   --Very-Dark-Gray: hsl(0, 0%, 41%);
   --Space-Blue: #2c365e;
+  --Light-Blue: #4a5881;
   --Dark-Blue: #171d30;
   --Dark-Blue-Section: #242b42;
   --Transp-Blue: #171d30e3;
@@ -204,8 +205,8 @@ header {
   font-weight: bold;
 }
 #search-btn:hover {
-  color: #2c365e;
-  background-color: var(--White);
+  /* color: #2c365e; */
+  background-color: var(--Light-Blue);
 }
 .nav-down-btn {
   position: absolute;
@@ -217,7 +218,7 @@ header {
   background-color: #171d30;
 }
 .nav-down-btn:hover {
-  background-color: #4a5881;
+  background-color: var(--Light-Blue);
 }
 
 /* Main */
@@ -264,7 +265,7 @@ main {
 }
 .poster img {
   height: 100%;
-  width: 130px;
+  width: 120px;
 }
 .movie-info {
   display: flex;
