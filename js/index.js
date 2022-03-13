@@ -161,5 +161,6 @@ function displayAsideMovies(data) {
 // Set visual color for movie rating
 function setColor(rating) {
   if (rating < 5) return "red";
+  if (rating < 5.9 && rating > 4.9) return "orange";
   return "green";
 }

@@ -193,6 +193,11 @@ main {
   border-radius: 20px;
   margin-right: 0.5em;
 }
+@media (min-width: 765px) {
+  .poster-img {
+    max-width: 270px;
+  }
+}
 
 /* Footer */
 .footer {
