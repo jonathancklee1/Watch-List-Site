@@ -28,11 +28,14 @@ function getDetails() {
   if (localStorage.getItem("clicked") === "movie") {
     getMovieDetails();
   } else {
-    // getAnimeDetails();
+    getAnimeDetails();
   }
 }
 function getMovieID() {
   return localStorage.getItem("movieId");
+}
+function getAnimeID() {
+  return localStorage.getItem("animeId");
 }
 
 function getMovieDetails() {
@@ -82,7 +85,49 @@ function getMovieDetails() {
       alert("Detail error" + err);
     });
 }
+function getAnimeDetails() {
+  const id = getAnimeID();
+  fetch(`https://api.jikan.moe/v4/anime/${id}`)
+    .then((res) => res.json())
+    .then((obj) => {
+      // console.log(data);
+      const image_path = obj.data.images.jpg.image_url;
+      const {
+        title,
+        status,
+        synopsis,
+        score,
+        studios,
+        episodes,
+        year,
+        genres,
+      } = obj.data;
+      // const productionNames=
+      movieDetailsSection.innerHTML = `
+          <div class="poster-div">
+               <img class="poster-img" src="${image_path}" alt="">
+          </div>
+            <h2 class="movie-title">${title}</h2>
+            <div class="genre-wrapper">
+            </div>
+            <p class="release-date">Released in ${year}</p>
+            <p class="production"></p>
+            <p class="status">Status: ${status}</p>
+            <p class="runtime">${episodes} episodes</p>
+            <p class="rating">MAL Rating: ${score}</p>
+            <h3 class="overview-heading">Overview</h3>
+            <p class="overview">${synopsis}</p>
+      `;
 
+      // Add production companies as comma delimited list
+      displayProdCompanies(studios);
+      // Add individual genre tag
+      displayGenres(genres);
+    })
+    .catch((err) => {
+      alert("Detail error " + err);
+    });
+}
 function displayGenres(arr) {
   const genreWrapper = document.querySelector(".genre-wrapper");
   for (genre in arr) {
