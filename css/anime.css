@@ -14,7 +14,11 @@ Variables
   --Dark-Gray: hsl(0, 0%, 55%);
   --Very-Dark-Gray: hsl(0, 0%, 41%);
   --Space-Blue: #2c365e;
+  --Lighter-Blue: #456bd1;
+  --Light-Blue: #4a5881;
   --Dark-Blue: #171d30;
+  --Dark-Blue-Section: #242b42;
+  --Transp-Blue: #171d30e3;
 }
 
 /* ===
@@ -24,73 +28,130 @@ Global Styles
 *,
 *::before,
 *::after {
-  /* font-family: "Alata", sans-serif; */
-  font-family: "Josefin Sans", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* text-align: center; */
 }
+body {
+  font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+}
+
 main {
-  color: white;
+  color: var(--White);
 }
 button {
   text-decoration: none;
-  padding: 1em 1.5em;
+  padding: 0.7em 1.1em;
   border-style: none;
   cursor: pointer;
 }
 ul li {
   list-style-type: none;
+  cursor: pointer;
 }
 h1 {
   font-size: 1.5rem;
-  text-align: center;
 }
-h2 {
-  text-align: center;
-}
+
 a {
   text-decoration: none;
-  color: white;
+  color: var(--White);
   cursor: pointer;
+}
+i {
+  color: var(--White);
+  font-size: 1.2rem;
 }
 
 /* ===
 Global Classes
 === */
 
+/* Nav */
 header {
+  width: 100%;
+  background-color: var(--Space-Blue);
+  position: fixed;
+  z-index: 99;
+  color: var(--White);
+  top: 0;
+}
+.header-container {
+  /* max-width: 1400px; */
+  width: 85%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  background-color: var(--Space-Blue);
-  color: var(--White);
-  padding: 2em 3em;
-  position: fixed;
-  z-index: 99;
+  margin: 0 auto;
+  padding: 2em 0;
 }
-/* .search-section {
-  width: 100%;
-  min-height: 100vh;
-} */
 
 .nav-bar ul {
   display: none;
-  /* display: flex; */
   align-items: center;
   justify-content: space-between;
 }
+
+.nav-bar ul a:hover,
+.nav-bar ul a:focus,
+.current {
+  border-bottom: 2px solid var(--White);
+}
+
+.hamburger-icon {
+  display: block;
+}
+.mobile-nav-bar {
+  text-align: left;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--Dark-Blue);
+  padding: 2.5em;
+  transform: translateX(100%);
+  transition: transform 0.6s ease-in-out;
+}
+.mobile-nav-bar.open {
+  transform: translateX(0%);
+}
+.mobile-nav-bar h1 {
+  margin-bottom: 4em;
+  font-size: 1.8rem;
+}
+.mobile-nav-bar > ul {
+  font-size: 1.4rem;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  text-transform: uppercase;
+}
+.mobile-nav-bar > ul li {
+  margin-bottom: 2em;
+}
+#mobile-close-icon {
+  float: right;
+}
+
 @media (min-width: 765px) {
   .nav-bar ul {
     display: flex;
   }
+  .hamburger-icon {
+    display: none;
+  }
 }
 .nav-bar ul li {
-  margin-right: 1em;
+  margin-right: 2em;
   font-size: 1.2rem;
 }
+
+/* Banner */
 .banner {
   width: 100%;
   min-height: calc(100vh - 88px);
@@ -99,13 +160,14 @@ header {
   background-repeat: no-repeat;
   display: grid;
   place-items: center;
+  position: relative;
 }
 .search-bar {
   width: 90%;
   min-width: 12em;
   max-width: 40em;
   border-radius: 25px;
-  padding: 0.7em;
+  padding: 0.7em 1.2em;
   margin-bottom: 1em;
   border-style: none;
   text-align: left;
@@ -138,23 +200,50 @@ header {
 #search-btn {
   display: block;
   border-radius: 25px;
-  background-color: #2c365e;
-  color: white;
+  background-color: var(--Lighter-Blue);
+  color: var(--White);
   margin: 0 auto;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+#search-btn:hover {
+  background-color: var(--Dark-Blue);
+}
+.nav-down-div {
+  position: absolute;
+  bottom: 3em;
+}
+.nav-down-div h2 {
+  margin-bottom: 1em;
+}
+.nav-down-btn {
+  border-radius: 50px;
+  padding: 0;
+  height: 3em;
+  width: 3em;
+  background-color: var(--Lighter-Blue);
+}
+.nav-down-btn:hover {
+  background-color: var(--Dark-Blue);
 }
 
+/* Main */
 main {
   background-color: var(--Dark-Blue);
   padding-top: 88px;
 }
-.movie-list-section {
-  /* width: 85%;
-  margin: 1em auto; */
-}
-.movie-list-section > h2 {
+.anime-list-section > h2 {
   margin: 2em 0;
 }
-.movie-list {
+.anime-results {
+  display: flex;
+  flex-direction: column;
+}
+.anime-list-section {
+  order: 2;
+  margin-bottom: 4em;
+}
+.anime-list {
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -162,47 +251,287 @@ main {
   align-items: center;
   flex-wrap: wrap;
 }
-.movie-card,
-.movie-card-aside {
+.anime-card,
+.anime-card-aside {
   display: flex;
-  border: 1px solid white;
   height: 10em;
   width: 100%;
-  margin-bottom: 1em;
+  text-align: left;
+  color: black;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+  overflow: hidden;
 }
-.movie-card img {
+.poster {
+  min-width: 130px;
+}
+.poster img {
   height: 100%;
+  width: 120px;
 }
-.movie-info {
+.anime-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   padding: 2em 1em;
-  background-color: rgb(15, 9, 5);
+  background-color: var(--Dark-Blue-Section);
+  width: 100%;
+  color: var(--White);
+}
+.anime-title {
   width: 100%;
 }
-.movie-overview {
+.duration,
+.release-year,
+.dot {
+  margin-right: 2em;
+}
+.anime-overview {
   display: none;
+  color: var(--White);
+  background-color: var(--Dark-Blue-Section);
+  padding: 1em;
 }
-.top-rated-movies-aside {
-  border: 1px solid white;
-  width: 85%;
+@media (min-width: 540px) {
+  .anime-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+  }
+}
+.blurb {
+  display: -webkit-box;
+  max-width: 500px;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #666;
+  display: inline-block;
+}
+.upcoming-animes-aside {
+  width: 100%;
   margin: 0 auto;
+  order: 1;
 }
-.top-rated-movies-aside > h2 {
+.upcoming-animes-aside > h2 {
   margin: 2em 0;
 }
-.top-rated-list {
-  width: 85%;
-  margin: 0 auto;
-  display: flex;
-  /* justify-content: space-between; */
-  align-items: center;
-  /* flex-wrap: wrap; */
-  overflow-x: auto;
-}
-.movie-card-aside {
-  display: block;
-  height: 15em;
-  width: 10em;
-}
-.movie-card-aside img {
+.upcoming-list {
   width: 100%;
+  margin: 0 auto;
+  padding: 0 2em;
+  display: flex;
+  align-items: center;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+.anime-card-aside {
+  display: block;
+  max-width: 9em;
+  min-width: 9em;
+  overflow: hidden;
+  margin-right: 0.3em;
+  color: var(--White);
+  height: auto;
+  width: 100%;
+  max-width: 120px;
+}
+.anime-card-aside .anime-info {
+  padding: 1em 0.5em;
+}
+.anime-card-aside .anime-info {
+  height: 88px;
+}
+.anime-card-aside > img,
+.anime-card img {
+  color: var(--White);
+}
+
+.anime-card-aside > img {
+  width: 144px;
+  height: calc(144px / 3 * 4.3);
+  float: left;
+}
+.anime-card-aside h3 {
+  width: 100%;
+  white-space: normal;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+}
+.red {
+  color: rgb(177, 8, 8);
+}
+.green {
+  color: rgb(5, 173, 5);
+}
+.orange {
+  color: #f7a000;
+}
+@media (min-width: 810px) {
+  /* Scrollbar */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 13px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 15px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .anime-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
+    gap: 5px;
+    width: 85%;
+  }
+  .anime-card {
+    max-width: 14em;
+    flex-direction: column;
+    height: auto;
+    margin: 0.5em;
+    margin-top: 0;
+    position: relative;
+  }
+  .poster {
+    width: auto;
+    height: calc(14em / 3 * 4.3);
+  }
+  .poster img {
+    width: 100%;
+  }
+  .anime-info {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    flex-wrap: wrap;
+    background-color: var(--Dark-Blue-Section);
+    height: 90px;
+  }
+  .anime-title {
+    width: 100%;
+    margin-bottom: 0.3em;
+    font-size: 0.9rem;
+  }
+  .duration,
+  .release-year,
+  .rating {
+    margin-right: 0;
+    width: 32%;
+    display: flex;
+    align-items: flex-end;
+  }
+  .release-year {
+    justify-content: flex-end;
+  }
+  .rating {
+    font-weight: bold;
+    text-align: right;
+    justify-content: flex-end;
+  }
+  .anime-overview {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    padding: 1em;
+    background-color: var(--Transp-Blue);
+    line-height: 1.4rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease-in;
+  }
+  .blurb {
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 15;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .anime-card:hover .anime-overview {
+    transform: translateY(0%);
+  }
+  .anime-overview a {
+    font-weight: bold;
+  }
+  .anime-results {
+    flex-direction: row;
+  }
+  .anime-list-section {
+    order: 1;
+    width: 78%;
+  }
+  .upcoming-animes-aside {
+    width: 22%;
+    min-width: 270px;
+    background-color: var(--Dark-Blue-Section);
+    position: sticky;
+    top: 88px;
+    margin: 1.5em;
+    max-height: 90vh;
+    overflow-y: scroll;
+    padding-bottom: 1em;
+    /* position: relative; */
+  }
+
+  .upcoming-animes-aside h2 {
+    margin: 1em;
+    margin-bottom: 1.5em;
+    position: sticky;
+    top: 0;
+    right: 0;
+    background-color: var(--Dark-Blue-Section);
+    padding: 1em;
+  }
+  .upcoming-list {
+    display: block;
+    /* min-height: 500px; */
+    /* max-height: 1000px; */
+    /* overflow-y: scroll; */
+    /* margin: 0 1em; */
+  }
+  .anime-card-aside {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+  }
+  .anime-card-aside > img {
+    width: 110px;
+    height: calc(110px / 3 * 4.3);
+    float: left;
+  }
+  .anime-card-aside h3 {
+    width: 100%;
+    white-space: normal;
+    font-size: 0.9rem;
+  }
+  .dot {
+    margin-right: 0;
+  }
+/* Footer */
+.footer {
+  background-color: var(--Space-Blue);
+  padding: 3em;
+  color: var(--White);
 }

@@ -1,13 +1,6 @@
 const closeBtn = document.getElementById("mobile-close-icon");
 const mobileNav = document.querySelector(".mobile-nav-bar");
 const hamburgerIcon = document.querySelector(".hamburger-icon");
-const navDownBtn = document.querySelector(".nav-down-btn");
-const movieListSection = document.querySelector(".movie-list-section");
-const movieList = document.querySelector(".movie-list");
-const upcomingList = document.querySelector(".upcoming-list");
-const searchBar = document.querySelector(".search-bar");
-const searchBtn = document.getElementById("search-btn");
-const form = document.querySelector(".search-func");
 const movieDetailsSection = document.querySelector(".movie-details");
 
 const API_KEY = "api_key=42c15f29217106b8f3f7867104c1fc6a";
@@ -22,8 +15,7 @@ const SEARCH_API_URL = BASE_URL + "/search/movie?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Function Invocation
-getMovieDetails();
-
+getDetails();
 // Event listeners
 hamburgerIcon.addEventListener("click", () => {
   mobileNav.classList.add("open");
@@ -32,7 +24,13 @@ hamburgerIcon.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
   mobileNav.classList.remove("open");
 });
-
+function getDetails() {
+  if (localStorage.getItem("clicked") === "movie") {
+    getMovieDetails();
+  } else {
+    // getAnimeDetails();
+  }
+}
 function getMovieID() {
   return localStorage.getItem("movieId");
 }
@@ -76,24 +74,29 @@ function getMovieDetails() {
       `;
 
       // Add production companies as comma delimited list
-      const productionEl = document.querySelector(".production");
-      for (company in production_companies) {
-        productionEl.innerHTML +=
-          " " + production_companies[company].name + ",";
-      }
-      productionEl.innerHTML = productionEl.innerHTML.slice(0, -1);
-
+      displayProdCompanies(production_companies);
       // Add individual genre tag
-      const genreWrapper = document.querySelector(".genre-wrapper");
-      for (genre in genres) {
-        console.log(genres[genre].name);
-        const span = document.createElement("span");
-        span.classList.add("genres");
-        span.innerHTML = genres[genre].name;
-        genreWrapper.appendChild(span);
-      }
+      displayGenres(genres);
     })
     .catch((err) => {
       alert("Detail error" + err);
     });
+}
+
+function displayGenres(arr) {
+  const genreWrapper = document.querySelector(".genre-wrapper");
+  for (genre in arr) {
+    console.log(arr[genre].name);
+    const span = document.createElement("span");
+    span.classList.add("genres");
+    span.innerHTML = arr[genre].name;
+    genreWrapper.appendChild(span);
+  }
+}
+function displayProdCompanies(arr) {
+  const productionEl = document.querySelector(".production");
+  for (company in arr) {
+    productionEl.innerHTML += " " + arr[company].name + ",";
+  }
+  productionEl.innerHTML = productionEl.innerHTML.slice(0, -1);
 }

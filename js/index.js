@@ -126,6 +126,7 @@ function displayMainMovies(data) {
           // Set localstorage for movie id for details page
           movieCard.addEventListener("click", () => {
             localStorage.setItem("movieId", id);
+            localStorage.setItem("clicked", "movie");
             window.location.href = "details.html";
           });
         })
