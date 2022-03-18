@@ -10,11 +10,11 @@ const searchBtn = document.getElementById("search-btn");
 const form = document.querySelector(".search-func");
 
 const BASE_URL = "https://api.jikan.moe/v4/anime";
-const ASIDE_API_URL = BASE_URL + "?status=upcoming&limit=20";
+const ASIDE_API_URL = BASE_URL + "?status=airing";
 const SEARCH_API_URL = "https://api.jikan.moe/v4/anime?q=";
 
 // Function Invocation
-getAnimes(BASE_URL + "?limit=20");
+getAnimes(BASE_URL);
 getAsideAnimes(ASIDE_API_URL);
 
 // Event listeners
@@ -99,7 +99,7 @@ function displayMainAnimes(obj) {
                     <h3 class="anime-title">${title}</h3>
                     <p class="duration">${episodes + " ep"}</p>
                     <span class="dot"></span>
-                    <p class="release-year">${year}</p>
+                    <p class="release-year">${checkYear(year)}</p>
                     <p class="rating ${setColor(score)}">${checkScore(
         score
       )}</p>
@@ -111,7 +111,8 @@ function displayMainAnimes(obj) {
       animeList.appendChild(animeCard);
       // Set localstorage for anime id for details page
       animeCard.addEventListener("click", () => {
-        localStorage.setItem("animeId", mal_id);localStorage.setItem("clicked", "anime");
+        localStorage.setItem("animeId", mal_id);
+        localStorage.setItem("clicked", "anime");
         window.location.href = "details.html";
       });
     });
@@ -120,7 +121,7 @@ function displayMainAnimes(obj) {
 function displayAsideAnimes(obj) {
   obj.forEach((anime) => {
     const image_path = anime.images.jpg.image_url;
-    const { title, status } = anime;
+    const { mal_id, title, status } = anime;
     const animeAsideLi = document.createElement("li");
     const animeAsideCard = document.createElement("div");
     animeAsideCard.classList.add("anime-card-aside");
@@ -133,6 +134,11 @@ function displayAsideAnimes(obj) {
                `;
     animeAsideLi.appendChild(animeAsideCard);
     upcomingList.appendChild(animeAsideLi);
+    animeAsideCard.addEventListener("click", () => {
+      localStorage.setItem("animeId", mal_id);
+      localStorage.setItem("clicked", "anime");
+      window.location.href = "details.html";
+    });
   });
 }
 

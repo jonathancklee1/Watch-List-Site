@@ -325,7 +325,7 @@ main {
 .upcoming-list {
   width: 100%;
   margin: 0 auto;
-  padding: 0 2em;
+  padding: 0 1em;
   display: flex;
   align-items: center;
   overflow-y: auto;
@@ -495,7 +495,6 @@ main {
   }
 
   .upcoming-animes-aside h2 {
-    margin: 1em;
     margin-bottom: 1.5em;
     position: sticky;
     top: 0;
@@ -505,10 +504,6 @@ main {
   }
   .upcoming-list {
     display: block;
-    /* min-height: 500px; */
-    /* max-height: 1000px; */
-    /* overflow-y: scroll; */
-    /* margin: 0 1em; */
   }
   .anime-card-aside {
     display: flex;
@@ -517,7 +512,7 @@ main {
     max-width: 100%;
   }
   .anime-card-aside > img {
-    width: 110px;
+    min-width: 110px;
     height: calc(110px / 3 * 4.3);
     float: left;
   }
@@ -529,9 +524,10 @@ main {
   .dot {
     margin-right: 0;
   }
-/* Footer */
-.footer {
-  background-color: var(--Space-Blue);
-  padding: 3em;
-  color: var(--White);
+  /* Footer */
+  .footer {
+    background-color: var(--Space-Blue);
+    padding: 3em;
+    color: var(--White);
+  }
 }

@@ -51,27 +51,32 @@ function getMovieDetails() {
         overview,
         release_date,
         runtime,
-        budget,
+        status,
         genres,
         production_companies,
         original_language,
+        imdb_id,
+        homepage,
       } = data;
       // const productionNames=
       movieDetailsSection.innerHTML = `
           <div class="poster-div">
                <img class="poster-img" src="${IMG_URL + poster_path}" alt="">
           </div>
+          <div class="movie-info">
             <h2 class="movie-title">${title}</h2>
             <div class="genre-wrapper">
             </div>
-            <p class="release-date">Released on ${release_date}</p>
-            <p class="production"></p>
-            <p class="language">Language: ${String(
+            <p class="release-date"> <span class="bold">Release Date:</span> ${release_date}</p>
+            <p class="production"><span class="bold">Studios:</span> </p>
+            <p class="language"><span class="bold">Language:</span> ${String(
               original_language
             ).toUpperCase()}</p>
-            <p class="budget">Budget: $${budget}</p>
-            <p class="runtime">Runtime: ${runtime} minutes</p>
-            <p class="rating">Rating: ${vote_average}</p>
+            <p class="status"><span class="bold">Status: </span>  ${status}</p>
+            <p class="runtime"><span class="bold">Runtime: </span>  ${runtime} minutes</p>
+            <p class="rating"><span class="bold">Rating: </span> ${vote_average}</p>
+            <p class="links"><span class="bold">Links: </span> <span><a href="https://www.imdb.com/title/${imdb_id}/">IMBD Page,</a></span> <span><a href="${homepage}">Homepage</a></span></p>  
+            </div>
             <h3 class="overview-heading">Overview</h3>
             <p class="overview">${overview}</p>
       `;
@@ -92,6 +97,7 @@ function getAnimeDetails() {
     .then((obj) => {
       // console.log(data);
       const image_path = obj.data.images.jpg.image_url;
+      const trailer_path = obj.data.trailer.url;
       const {
         title,
         status,
@@ -101,22 +107,28 @@ function getAnimeDetails() {
         episodes,
         year,
         genres,
+        type,
+        url,
       } = obj.data;
       // const productionNames=
       movieDetailsSection.innerHTML = `
           <div class="poster-div">
                <img class="poster-img" src="${image_path}" alt="">
           </div>
-            <h2 class="movie-title">${title}</h2>
-            <div class="genre-wrapper">
-            </div>
-            <p class="release-date">Released in ${year}</p>
-            <p class="production"></p>
-            <p class="status">Status: ${status}</p>
-            <p class="runtime">${episodes} episodes</p>
-            <p class="rating">MAL Rating: ${score}</p>
-            <h3 class="overview-heading">Overview</h3>
-            <p class="overview">${synopsis}</p>
+          <div class="movie-info">
+              <h2 class="movie-title">${title}</h2>
+              <div class="genre-wrapper">
+              </div>
+              <p class="type">Type: ${checkInfo(type)}</p>
+              <p class="release-date">Released year: ${checkInfo(year)}</p>
+              <p class="production">Producers: </p>
+              <p class="status">Status: ${checkInfo(status)}</p>
+              <p class="runtime">Episodes: ${checkInfo(episodes)}</p>
+              <p class="rating">MAL Rating: ${checkInfo(score)}</p>  
+              <p class="links">Links: <span><a href="${url}">MyAnimeList Page,</a></span> <span><a href="${trailer_path}">Trailer</a></span></p>           
+          </div>
+          <h3 class="overview-heading">Synopsis</h3>
+          <p class="overview">${checkInfo(synopsis)}</p>
       `;
 
       // Add production companies as comma delimited list
@@ -144,4 +156,9 @@ function displayProdCompanies(arr) {
     productionEl.innerHTML += " " + arr[company].name + ",";
   }
   productionEl.innerHTML = productionEl.innerHTML.slice(0, -1);
+}
+
+function checkInfo(data) {
+  if (data === null) return "Unknown";
+  return data;
 }

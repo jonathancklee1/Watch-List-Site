@@ -155,6 +155,11 @@ function displayAsideMovies(data) {
                `;
         movieAsideLi.appendChild(movieAsideCard);
         upcomingList.appendChild(movieAsideLi);
+        movieAsideCard.addEventListener("click", () => {
+          localStorage.setItem("movieId", id);
+          localStorage.setItem("clicked", "movie");
+          window.location.href = "details.html";
+        });
       });
   });
 }
