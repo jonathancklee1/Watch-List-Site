@@ -364,6 +364,35 @@ main {
   font-size: 1rem;
   margin-bottom: 0.5em;
 }
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2em;
+}
+#prev,
+#current {
+  margin-right: 1em;
+}
+.page {
+  cursor: pointer;
+}
+#prev:hover,
+#next:hover {
+  font-weight: bold;
+}
+#current {
+  padding: 1em;
+  border: 2px solid var(--Light-Blue);
+  font-weight: bold;
+  /* background-color: var(--Light-Blue); */
+}
+.page.disabled {
+  cursor: not-allowed;
+  color: gray;
+}
 .red {
   color: rgb(177, 8, 8);
 }

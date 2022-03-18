@@ -9,12 +9,23 @@ const searchBar = document.querySelector(".search-bar");
 const searchBtn = document.getElementById("search-btn");
 const form = document.querySelector(".search-func");
 
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const current = document.getElementById("current");
+
+let currentPage = 1;
+let nextPage = 2;
+let prevPage = 3;
+let lastUrl = "";
+let totalPages = 100;
+
 const BASE_URL = "https://api.jikan.moe/v4/anime";
+const MAIN_URL = BASE_URL + "?page=1";
 const ASIDE_API_URL = BASE_URL + "?status=airing";
 const SEARCH_API_URL = "https://api.jikan.moe/v4/anime?q=";
 
 // Function Invocation
-getAnimes(BASE_URL);
+getAnimes(MAIN_URL);
 getAsideAnimes(ASIDE_API_URL);
 
 // Event listeners
@@ -47,14 +58,75 @@ searchBtn.addEventListener("click", (e) => {
   });
 });
 
+prev.addEventListener("click", () => {
+  if (prevPage > 0) {
+    callPage(prevPage);
+    currentPage -= 1;
+  }
+  animeListSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
+  });
+});
+
+next.addEventListener("click", () => {
+  if (nextPage <= totalPages) {
+    callPage(nextPage);
+    currentPage += 1;
+  }
+  animeListSection.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
+  });
+});
+
 // Functions
+function callPage(page) {
+  console.log(page);
+  let urlSplit = lastUrl.split("?");
+  console.log(lastUrl);
+  console.log(urlSplit);
+  let queryParams = urlSplit[1];
+  let pageParam = queryParams.split("=");
+  if (pageParam[0] != "page") {
+    let url = lastUrl + "&page=" + page;
+    getAnimes(url);
+  } else {
+    pageParam[1] = page.toString();
+    let key = pageParam.join("=");
+    // queryParams = key;
+    // let key2 = queryParams.join("&");
+    let url = urlSplit[0] + "?" + key;
+    getAnimes(url);
+  }
+}
+
 // Retrieve animes from TMDB API
 function getAnimes(url) {
+  lastUrl = url;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.data);
+      console.log(data);
       displayMainAnimes(data.data);
+      // currentPage = data.page;
+      nextPage = currentPage + 1;
+      prevPage = currentPage - 1;
+      totalPages = data.pagination.last_visible_page;
+      current.innerText = currentPage;
+      // Enable/disable navigation button for pagination
+      if (currentPage <= 1) {
+        prev.classList.add("disabled");
+        next.classList.remove("disabled");
+      } else if (currentPage >= totalPages) {
+        prev.classList.remove("disabled");
+        next.classList.add("disabled");
+      } else {
+        prev.classList.remove("disabled");
+        next.classList.remove("disabled");
+      }
     })
     .catch((err) => alert("getanimes " + err));
 }
@@ -63,7 +135,6 @@ function getAsideAnimes(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.data);
       displayAsideAnimes(data.data);
     })
     .catch((err) => alert("Aside" + err));
@@ -85,7 +156,7 @@ function displayMainAnimes(obj) {
     obj.forEach((anime) => {
       // const { mal_id } = anime;
       // Retrieve anime details for targeted anime
-      console.log(anime);
+      // console.log(anime);
       const image_path = anime.images.jpg.image_url;
       const { mal_id, title, score, synopsis, year, episodes } = anime;
       // console.log(data.title);
