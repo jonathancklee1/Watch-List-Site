@@ -28,7 +28,11 @@ const SEARCH_API_URL = BASE_URL + "/search/tv?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Function Invocation
-getTvs(MAIN_API_URL);
+if (sessionStorage.getItem("tv-page")) {
+  getTvs(sessionStorage.getItem("tv-page"));
+} else {
+  getTvs(MAIN_API_URL);
+}
 getAsideTvs(ASIDE_API_URL);
 
 // Event listeners
@@ -90,6 +94,7 @@ function callPage(page) {
   let pageParam = queryParams[queryParams.length - 1].split("=");
   if (pageParam[0] != "page") {
     let url = lastUrl + "&page=" + page;
+    sessionStorage.setItem("tv-page", url);
     getTvs(url);
   } else {
     pageParam[1] = page.toString();
@@ -97,6 +102,7 @@ function callPage(page) {
     queryParams[queryParams.length - 1] = key;
     let key2 = queryParams.join("&");
     let url = urlSplit[0] + "?" + key2;
+    sessionStorage.setItem("tv-page", url);
     getTvs(url);
   }
 }
@@ -177,10 +183,9 @@ function displayMainTvs(data) {
                     <h3 class="tv-title">${name}</h3>
                     <p class="duration">${number_of_seasons + " series"}</p>
                     <span class="dot"></span>
-                    <p class="release-year">${first_air_date.substring(
-                      0,
-                      4
-                    )}</p>
+                    <p class="release-year">${checkInfo(
+                      first_air_date
+                    ).substring(0, 4)}</p>
                     <p class="rating ${setColor(
                       vote_average
                     )}">${vote_average}</p>
@@ -236,4 +241,8 @@ function setColor(rating) {
   if (rating < 5) return "red";
   if (rating < 5.9 && rating > 4.9) return "orange";
   return "green";
+}
+function checkInfo(data) {
+  if (data === null) return "Unknown";
+  return data;
 }

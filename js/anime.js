@@ -25,7 +25,11 @@ const ASIDE_API_URL = BASE_URL + "?status=airing";
 const SEARCH_API_URL = "https://api.jikan.moe/v4/anime?q=";
 
 // Function Invocation
-getAnimes(MAIN_URL);
+if (sessionStorage.getItem("anime-page")) {
+  getAnimes(sessionStorage.getItem("anime-page"));
+} else {
+  getAnimes(MAIN_URL);
+}
 getAsideAnimes(ASIDE_API_URL);
 
 // Event listeners
@@ -92,13 +96,13 @@ function callPage(page) {
   let pageParam = queryParams.split("=");
   if (pageParam[0] != "page") {
     let url = lastUrl + "&page=" + page;
+    sessionStorage.setItem("anime-page", url);
     getAnimes(url);
   } else {
     pageParam[1] = page.toString();
     let key = pageParam.join("=");
-    // queryParams = key;
-    // let key2 = queryParams.join("&");
     let url = urlSplit[0] + "?" + key;
+    sessionStorage.setItem("anime-page", url);
     getAnimes(url);
   }
 }

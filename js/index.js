@@ -30,8 +30,13 @@ const ASIDE_API_URL =
 const SEARCH_API_URL = BASE_URL + "/search/movie?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
-// Function Invocation
-getMovies(MAIN_API_URL);
+
+if (sessionStorage.getItem("movie-page")) {
+  getMovies(sessionStorage.getItem("movie-page"));
+} else {
+  getMovies(MAIN_API_URL);
+}
+
 getAsideMovies(ASIDE_API_URL);
 
 // Event listeners
@@ -93,6 +98,7 @@ function callPage(page) {
   let pageParam = queryParams[queryParams.length - 1].split("=");
   if (pageParam[0] != "page") {
     let url = lastUrl + "&page=" + page;
+    sessionStorage.setItem("movie-page", url);
     getMovies(url);
   } else {
     pageParam[1] = page.toString();
@@ -100,6 +106,7 @@ function callPage(page) {
     queryParams[queryParams.length - 1] = key;
     let key2 = queryParams.join("&");
     let url = urlSplit[0] + "?" + key2;
+    sessionStorage.setItem("movie-page", url);
     getMovies(url);
   }
 }
