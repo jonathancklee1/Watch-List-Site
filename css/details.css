@@ -152,11 +152,11 @@ main {
   min-height: 100vh;
   padding: 10em 2em;
 }
-.movie-details-wrapper {
+.media-details-wrapper {
   display: grid;
   place-items: center;
 }
-.movie-details {
+.media-details {
   max-width: 900px;
 }
 .poster-img {
@@ -167,7 +167,7 @@ main {
   place-items: center;
   margin-bottom: 2em;
 }
-.movie-title {
+.media-title {
   margin-bottom: 1em;
   font-size: 1.9rem;
 }
@@ -176,18 +176,10 @@ main {
   text-align: center;
   border-bottom: 1px solid white;
   padding-bottom: 0.5em;
+  margin-bottom: 1em;
 }
-.genre-wrapper,
-.release-date,
-.production,
-.budget,
-.runtime,
-.rating,
-.overview-heading,
-.language,
-.status,
-.type,
-.links {
+
+.detail {
   margin-bottom: 1.3em;
   text-align: center;
 }
@@ -198,6 +190,7 @@ main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 1em;
 }
 .genres {
   padding: 0.5em 1em;
@@ -212,7 +205,7 @@ main {
 .bold {
   font-weight: bold;
 }
-.movie-info {
+.media-info {
   background-color: var(--Space-Blue);
   padding: 2em;
   border-radius: 15px;
@@ -222,12 +215,12 @@ main {
   .poster-img {
     width: 310px;
   }
-  .movie-details {
+  .media-details {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  .movie-info {
+  .media-info {
     width: 55%;
     margin-bottom: 3em;
   }
@@ -235,17 +228,7 @@ main {
     width: 30%;
   }
 
-  .genre-wrapper,
-  .release-date,
-  .production,
-  .budget,
-  .runtime,
-  .rating,
-  .overview-heading,
-  .language,
-  .status,
-  .type,
-  .links {
+  .detail {
     margin-bottom: 1.3em;
     text-align: left;
   }

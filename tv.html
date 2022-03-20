@@ -5,10 +5,13 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="./css/anime.css">
+   <script src="https://kit.fontawesome.com/93f4c43aa5.js" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
-   <title>MyWatchList - Anime</title>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+   <link rel="stylesheet" href="./css/tv.css">
+
+   <title>MyWatchList - TV Shows</title>
 </head>
 
 <body>
@@ -22,10 +25,10 @@
                   <a href="./index.html">Movies</a>
                </li>
                <li>
-                  <a href="./tv.html">TV Shows</a>
+                  <a href="#" class="current">TV Shows</a>
                </li>
                <li>
-                  <a href="#" class="current">Anime</a>
+                  <a href="./anime.html">Anime</a>
                </li>
                <li>
                   <a href="./about.html">About</a>
@@ -43,10 +46,10 @@
                   <a href="./index.html">Movies</a>
                </li>
                <li>
-                  <a href="./tv.html">TV Shows</a>
+                  <a href="#">TV Shows</a>
                </li>
                <li>
-                  <a href="#" class="current">Anime</a>
+                  <a href="./anime.html">Anime</a>
                </li>
                <li>
                   <a href="./about.html">About</a>
@@ -54,6 +57,7 @@
                <li>
                   <a href="./myList.html">My List</a>
                </li>
+
             </ul>
          </nav>
       </div>
@@ -65,14 +69,14 @@
          <div class="banner">
             <div class="overlay">
                <div class="search-div">
-                  <h2>Search for your favourite animes!</h2>
+                  <h2>Search for your favourite TV shows!</h2>
                   <form class="search-func">
                      <input type="text" class="search-bar" placeholder="Search">
                      <button id="search-btn">Search</button>
                   </form>
                </div>
                <div class="nav-down-div">
-                  <h2>Explore animes</h2>
+                  <h2>Explore shows</h2>
                   <button class="nav-down-btn"><i class="fa fa-arrow-down"></i></button>
                </div>
 
@@ -80,13 +84,13 @@
 
          </div>
       </section>
-      <section class="anime-results">
-         <section class="anime-list-section">
-            <h2>Anime List</h2>
-            <div class="anime-list"></div>
+      <section class="tv-results">
+         <section class="tv-list-section">
+            <h2>TV Shows List</h2>
+            <div class="tv-list"></div>
          </section>
-         <aside class="upcoming-animes-aside">
-            <h2>Airing Animes</h2>
+         <aside class="upcoming-tvs-aside">
+            <h2>Airing</h2>
             <ul class="upcoming-list">
             </ul>
          </aside>
@@ -96,12 +100,13 @@
          <div class="current-page" id="current">1</div>
          <div class="page" id="next">Next Page</div>
       </div>
+
    </main>
 
    <footer class="footer">
       <div class="copyright">© 2022 Jonathan Lee. All rights reserved.</div>
    </footer>
-   <script src="./js/anime.js"></script>
+   <script src="./js/tv.js"></script>
 </body>
 
 </html>
