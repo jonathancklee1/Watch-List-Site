@@ -181,8 +181,10 @@ header {
   width: 100%;
   height: 100%;
   z-index: 1;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .search-div {
   width: 80%;
@@ -196,6 +198,7 @@ header {
 }
 .search-func {
   position: relative;
+  margin-bottom: 3em;
 }
 #search-btn {
   display: block;
@@ -209,10 +212,7 @@ header {
 #search-btn:hover {
   background-color: var(--Dark-Blue);
 }
-.nav-down-div {
-  position: absolute;
-  bottom: 3em;
-}
+
 .nav-down-div h2 {
   margin-bottom: 1em;
 }
@@ -402,6 +402,14 @@ main {
 .orange {
   color: #f7a000;
 }
+
+/* Footer */
+.footer {
+  background-color: var(--Space-Blue);
+  padding: 3em;
+  color: var(--White);
+}
+
 @media (min-width: 810px) {
   /* Scrollbar */
   /* width */
@@ -558,11 +566,4 @@ main {
   .dot {
     margin-right: 0;
   }
-}
-
-/* Footer */
-.footer {
-  background-color: var(--Space-Blue);
-  padding: 3em;
-  color: var(--White);
 }

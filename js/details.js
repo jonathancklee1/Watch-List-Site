@@ -5,13 +5,6 @@ const mediaDetailsSection = document.querySelector(".media-details");
 
 const API_KEY = "api_key=42c15f29217106b8f3f7867104c1fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
-const MAIN_API_URL =
-  BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
-const ASIDE_API_URL =
-  BASE_URL +
-  "/movie/now_playing?primary_release_year=2022&language=en-US&" +
-  API_KEY;
-const SEARCH_API_URL = BASE_URL + "/search/movie?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Function Invocation
