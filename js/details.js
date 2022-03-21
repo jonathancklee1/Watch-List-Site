@@ -55,30 +55,48 @@ function getMovieDetails() {
         original_language,
         imdb_id,
         homepage,
+        backdrop_path,
       } = data;
+      let backdropSource = IMG_URL + backdrop_path;
       // const productionNames=
       mediaDetailsSection.innerHTML = `
-          <div class="poster-div">
-               <img class="poster-img" src="${IMG_URL + poster_path}" alt="">
-          </div>
-          <div class="media-info">
-            <h2 class="media-title">${title}</h2>
-            <div class="genre-wrapper">
-            </div>
-            <p class="release-date detail"> <span class="bold">Release Date:</span> ${release_date}</p>
-            <p class="production detail"><span class="bold">Studios:</span> </p>
-            <p class="language detail"><span class="bold">Language:</span> ${String(
-              original_language
-            ).toUpperCase()}</p>
-            <p class="status detail"><span class="bold">Status: </span>  ${status}</p>
-            <p class="runtime detail"><span class="bold">Runtime: </span>  ${runtime} minutes</p>
-            <p class="rating detail"><span class="bold">Rating: </span> ${vote_average}</p>
-            <p class="links detail"><span class="bold">Links: </span> <span><a href="https://www.imdb.com/title/${imdb_id}/">IMBD Page,</a></span> <span><a href="${homepage}">Homepage</a></span></p>  
-            </div>
-            <h3 class="overview-heading">Overview</h3>
-            <p class="overview">${overview}</p>
-      `;
+            <div class="backdrop">
+               <div class="backdrop-img-div">
+                  <img src="./img/movies-cover.jpg" alt="" class="backdrop-img">
+               </div>
 
+               <div class="media-info">
+                <div class="poster-div">
+                    <img class="poster-img" src="${
+                      IMG_URL + poster_path
+                    }" alt="">
+                </div>
+                <div class="media-content">
+                    <h2 class="media-title">${title}</h2>
+                    <div class="genre-wrapper">
+                    </div>
+                    <p class="release-date detail"> <span class="bold">Release Date:</span> ${release_date}</p>
+                    <p class="production detail"><span class="bold">Studios:</span> </p>
+                    <p class="language detail"><span class="bold">Language:</span> ${String(
+                      original_language
+                    ).toUpperCase()}</p>
+                    <p class="status detail"><span class="bold">Status: </span> ${status}</p>
+                    <p class="runtime detail"><span class="bold">Runtime: </span> ${runtime} minutes</p>
+                    <p class="rating detail"><span class="bold">Rating: </span> ${vote_average}</p>
+                    <p class="links detail"><span class="bold">Links: </span> <span><a
+                            href="https://www.imdb.com/title/${imdb_id}/">IMBD Page,</a></span> <span><a
+                            href="${homepage}">Homepage</a></span></p>
+                  </div>
+               </div>
+            </div>
+               
+               
+            
+            <h3 class="overview-heading">Overview</h3>
+               <p class="overview">${overview}</p>
+      `;
+      const backdropImg = document.querySelector(".backdrop-img");
+      backdropImg.src = backdropSource;
       // Add production companies as comma delimited list
       displayProdCompanies(production_companies);
       // Add individual genre tag
@@ -109,33 +127,51 @@ function getTvDetails() {
         homepage,
         number_of_seasons,
         number_of_episodes,
+        backdrop_path,
       } = data;
-      // const productionNames=
+      let backdropSource = IMG_URL + backdrop_path;
       mediaDetailsSection.innerHTML = `
-          <div class="poster-div">
-               <img class="poster-img" src="${IMG_URL + poster_path}" alt="">
-          </div>
-          <div class="media-info">
-            <h2 class="media-title">${name}</h2>
-            <div class="genre-wrapper">
+      <div class="backdrop">
+              <div class="backdrop-img-div">
+                  <img src="" alt="" class="backdrop-img">
+              </div>
+
+              <div class="media-info">
+                <div class="poster-div">
+                    <img class="poster-img" src="${
+                      IMG_URL + poster_path
+                    }" alt="">
+                </div>
+
+                <div class="media-content">
+                  <h2 class="media-title">${name}</h2>
+                  <div class="genre-wrapper">
+                  </div>
+                  <p class="release-date detail"> <span class="bold">First Aired:</span> ${first_air_date}</p>
+                  <p class="production detail"><span class="bold">Producers:</span> </p>
+                  <p class="language detail"><span class="bold">Language:</span> ${String(
+                    original_language
+                  ).toUpperCase()}</p>
+                  <p class="type detail"><span class="bold">Type: </span>  ${type}</p>
+                  <p class="seasons detail"><span class="bold">Number of Seasons: </span>  ${number_of_seasons} </p>
+                  <p class="episodes detail"><span class="bold">Number of Episodes: </span>  ${number_of_episodes} </p>
+                  <p class="ep-runtime detail"><span class="bold">Episode Runtime: </span>  ${
+                    episode_run_time[0]
+                  } minutes</p>
+                  <p class="rating detail"><span class="bold">Rating: </span> ${vote_average}</p>
+                  <p class="links detail"><span class="bold">Links: </span> <span><a href="${homepage}">Homepage</a></span></p>  
+                </div>
+
+              </div>
+
             </div>
-            <p class="release-date detail"> <span class="bold">First Aired:</span> ${first_air_date}</p>
-            <p class="production detail"><span class="bold">Producers:</span> </p>
-            <p class="language detail"><span class="bold">Language:</span> ${String(
-              original_language
-            ).toUpperCase()}</p>
-            <p class="type detail"><span class="bold">Type: </span>  ${type}</p>
-            <p class="seasons detail"><span class="bold">Number of Seasons: </span>  ${number_of_seasons} </p>
-            <p class="episodes detail"><span class="bold">Number of Episodes: </span>  ${number_of_episodes} </p>
-            <p class="ep-runtime detail"><span class="bold">Episode Runtime: </span>  ${
-              episode_run_time[0]
-            } minutes</p>
-            <p class="rating detail"><span class="bold">Rating: </span> ${vote_average}</p>
-            <p class="links detail"><span class="bold">Links: </span> <span><a href="${homepage}">Homepage</a></span></p>  
-            </div>
+
             <h3 class="overview-heading">Overview</h3>
             <p class="overview">${overview}</p>
       `;
+
+      const backdropImg = document.querySelector(".backdrop-img");
+      backdropImg.src = backdropSource;
       // Add production companies as comma delimited list
       displayProdCompanies(production_companies);
       // Add individual genre tag
@@ -153,6 +189,7 @@ function getAnimeDetails() {
     .then((obj) => {
       // console.log(data);
       const image_path = obj.data.images.jpg.image_url;
+      const backdropSource = obj.data.images.jpg.large_image_url;
       const trailer_path = obj.data.trailer.url;
       const {
         title,
@@ -168,11 +205,17 @@ function getAnimeDetails() {
       } = obj.data;
       // const productionNames=
       mediaDetailsSection.innerHTML = `
-          <div class="poster-div">
-               <img class="poster-img" src="${image_path}" alt="">
-          </div>
-          <div class="media-info">
-              <h2 class="media-title">${title}</h2>
+            <div class="backdrop">
+               <div class="backdrop-img-div">
+                  <img src="" alt="" class="backdrop-img">
+               </div>
+
+               <div class="media-info">
+                <div class="poster-div">
+                  <img class="poster-img" src="${image_path}" alt="">
+               </div>
+                <div class="media-content">
+                    <h2 class="media-title">${title}</h2>
               <div class="genre-wrapper">
               </div>
               <p class="type detail">Type: ${checkInfo(type)}</p>
@@ -183,12 +226,15 @@ function getAnimeDetails() {
               <p class="status detail">Status: ${checkInfo(status)}</p>
               <p class="runtime detail">Episodes: ${checkInfo(episodes)}</p>
               <p class="rating detail">MAL Rating: ${checkInfo(score)}</p>  
-              <p class="links detail">Links: <span><a href="${url}">MyAnimeList Page,</a></span> <span><a href="${trailer_path}">Trailer</a></span></p>           
-          </div>
+              <p class="links detail">Links: <span><a href="${url}">MyAnimeList Page,</a></span> <span><a href="${trailer_path}">Trailer</a></span></p> 
+                  </div>
+               </div>
+            </div>
           <h3 class="overview-heading">Synopsis</h3>
           <p class="overview">${checkInfo(synopsis)}</p>
       `;
-
+      const backdropImg = document.querySelector(".backdrop-img");
+      backdropImg.src = backdropSource;
       // Add production companies as comma delimited list
       displayProdCompanies(studios);
       // Add individual genre tag
