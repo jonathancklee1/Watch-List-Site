@@ -25,12 +25,16 @@ Global Styles
 *::before,
 *::after {
   /* font-family: "Alata", sans-serif; */
-  font-family: "Josefin Sans", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   /* text-align: center; */
 }
+body {
+  font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+}
+
 main {
   color: white;
 }
@@ -58,7 +62,11 @@ a {
 p {
   font-size: 1.3rem;
 }
-
+i {
+  color: var(--White);
+  /* width: 1em; */
+  font-size: 1.1rem;
+}
 /* ===
 Global Classes
 === */
@@ -228,7 +236,6 @@ header {
   align-items: flex-start;
   margin-bottom: 2em;
   z-index: 99;
-  margin-right: 3em;
 }
 .media-title {
   margin-bottom: 1em;
@@ -272,6 +279,32 @@ header {
 .links a {
   text-decoration: underline;
 }
+.links-div {
+  display: flex;
+}
+.links-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1em;
+  background-color: var(--Dark-Blue);
+  border-radius: 10px;
+  max-width: 12em;
+  cursor: pointer;
+  margin-right: 1em;
+}
+.links-item i {
+  width: 2em;
+}
+.links-item p {
+}
+.links-item:hover {
+  background-color: var(--Space-Blue);
+}
+.links-item img {
+  max-width: 1.5em;
+  margin-right: 0.5em;
+}
 .bold {
   font-weight: bold;
 }
@@ -295,6 +328,7 @@ header {
   }
   .poster-div {
     width: 30%;
+    margin-right: 3em;
   }
 
   .detail {

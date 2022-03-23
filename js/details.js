@@ -83,18 +83,32 @@ function getMovieDetails() {
                     <p class="status detail"><span class="bold">Status: </span> ${status}</p>
                     <p class="runtime detail"><span class="bold">Runtime: </span> ${runtime} minutes</p>
                     <p class="rating detail"><span class="bold">Rating: </span> ${vote_average}</p>
-                    <p class="links detail"><span class="bold">Links: </span> <span><a
-                            href="https://www.imdb.com/title/${imdb_id}/">IMBD Page,</a></span> <span><a
-                            href="${homepage}">Homepage</a></span></p>
+
+                    <div class="links-div">
+                       <div class="links-item home-item"> 
+                        <i class="fa fa-home"></i>
+                        <p>  Homepage</p>
+                       </div>
+                       <div class="links-item imdb-item"> 
+                        <img src="../img/imdb-icon.png">
+                        <p>IMDB Page</p>
+                       </div>
+                   </div>
                   </div>
                </div>
             </div>
-               
-               
-            
             <h3 class="overview-heading">Overview</h3>
-               <p class="overview">${overview}</p>
+            <p class="overview">${overview}</p>
       `;
+
+      const homeItem = document.querySelector(".home-item");
+      homeItem.addEventListener("click", () => {
+        window.open(homepage);
+      });
+      const imdbItem = document.querySelector(".imdb-item");
+      imdbItem.addEventListener("click", () => {
+        window.open(`https://www.imdb.com/title/${imdb_id}/`);
+      });
       const backdropImg = document.querySelector(".backdrop-img");
       backdropImg.src = backdropSource;
       // Add production companies as comma delimited list
@@ -159,7 +173,14 @@ function getTvDetails() {
                     episode_run_time[0]
                   } minutes</p>
                   <p class="rating detail"><span class="bold">Rating: </span> ${vote_average}</p>
-                  <p class="links detail"><span class="bold">Links: </span> <span><a href="${homepage}">Homepage</a></span></p>  
+
+                  <div class="links-div">
+                       <div class="links-item"> 
+                        <i class="fa fa-home"></i>
+                        <p>  Homepage</p>
+                       </div>
+                   </div>
+                  
                 </div>
 
               </div>
@@ -170,6 +191,10 @@ function getTvDetails() {
             <p class="overview">${overview}</p>
       `;
 
+      const linksItem = document.querySelector(".links-item");
+      linksItem.addEventListener("click", () => {
+        window.open(homepage);
+      });
       const backdropImg = document.querySelector(".backdrop-img");
       backdropImg.src = backdropSource;
       // Add production companies as comma delimited list
@@ -226,13 +251,33 @@ function getAnimeDetails() {
               <p class="status detail">Status: ${checkInfo(status)}</p>
               <p class="runtime detail">Episodes: ${checkInfo(episodes)}</p>
               <p class="rating detail">MAL Rating: ${checkInfo(score)}</p>  
-              <p class="links detail">Links: <span><a href="${url}">MyAnimeList Page,</a></span> <span><a href="${trailer_path}">Trailer</a></span></p> 
-                  </div>
-               </div>
+
+              <div class="links-div">
+                       <div class="links-item mal-item"> 
+                        <img src="../img/mal-icon.png">
+                        <p>  MAL Page</p>
+                       </div>
+                       <div class="links-item yt-item"> 
+                        <img src="../img/yt-icon.png">
+                        <p>Trailer</p>
+                       </div>
+              </div>
+              </div>
+            </div>
             </div>
           <h3 class="overview-heading">Synopsis</h3>
           <p class="overview">${checkInfo(synopsis)}</p>
       `;
+
+      const malItem = document.querySelector(".mal-item");
+      malItem.addEventListener("click", () => {
+        window.open(url);
+      });
+      const ytItem = document.querySelector(".yt-item");
+      ytItem.addEventListener("click", () => {
+        window.open(trailer_path);
+      });
+
       const backdropImg = document.querySelector(".backdrop-img");
       backdropImg.src = backdropSource;
       // Add production companies as comma delimited list
