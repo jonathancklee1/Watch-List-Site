@@ -15,6 +15,7 @@ Variables
   --Very-Dark-Gray: hsl(0, 0%, 41%);
   --Space-Blue: #2c365e;
   --Dark-Blue: #171d30;
+  --Secondary-Yellow: rgb(160, 150, 17);
 }
 
 /* ===
@@ -165,7 +166,6 @@ header {
   width: 90%;
   max-width: 1300px;
   position: relative;
-
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
@@ -214,8 +214,33 @@ header {
   object-fit: cover;
   object-position: center;
 }
+
+.add-div {
+  color: var(--Secondary-Yellow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--Secondary-Yellow);
+  position: relative;
+  padding: 1em;
+  z-index: 98;
+  cursor: pointer;
+}
+.add-div i {
+  margin-right: 1em;
+  color: var(--Secondary-Yellow);
+}
+
+.add-div:hover,
+.add-div:hover .fa-plus {
+  background-color: var(--Secondary-Yellow);
+  color: white;
+}
+
 .media-content {
-  max-width: 550px;
+  /* width: 0; */
+  /* max-width: 550px; */
+  /* margin: 0 auto; */
 }
 
 .media-info {
@@ -227,11 +252,10 @@ header {
   border-radius: 15px;
 }
 .poster-img {
-  width: 240px;
+  width: 180px;
 }
 .poster-div {
   display: flex;
-  /* place-items: center; */
   justify-content: center;
   align-items: flex-start;
   margin-bottom: 2em;
@@ -281,6 +305,9 @@ header {
 }
 .links-div {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
 }
 .links-item {
   display: flex;
@@ -289,14 +316,16 @@ header {
   padding: 1em 1em;
   background-color: var(--Dark-Blue);
   border-radius: 10px;
-  max-width: 12em;
+  max-width: 11em;
   cursor: pointer;
-  margin-right: 1em;
+  margin-right: 0.3em;
+  margin-bottom: 0.5em;
 }
 .links-item i {
   width: 2em;
 }
-.links-item p {
+.links-item > p {
+  font-size: 1rem;
 }
 .links-item:hover {
   background-color: var(--Space-Blue);
@@ -330,7 +359,9 @@ header {
     width: 30%;
     margin-right: 3em;
   }
-
+  .links-div {
+    justify-content: flex-start;
+  }
   .detail {
     margin-bottom: 1.3em;
     text-align: left;

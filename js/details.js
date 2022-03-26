@@ -61,6 +61,7 @@ function getMovieDetails() {
       // const productionNames=
       mediaDetailsSection.innerHTML = `
             <div class="backdrop">
+              
                <div class="backdrop-img-div">
                   <img src="./img/movies-cover.jpg" alt="" class="backdrop-img">
                </div>
@@ -87,13 +88,17 @@ function getMovieDetails() {
                     <div class="links-div">
                        <div class="links-item home-item"> 
                         <i class="fa fa-home"></i>
-                        <p>  Homepage</p>
+                        <p>  Home Page</p>
                        </div>
                        <div class="links-item imdb-item"> 
                         <img src="../img/imdb-icon.png">
                         <p>IMDB Page</p>
                        </div>
                    </div>
+                   <div class="add-div">
+                        <i class="fa fa-plus"></i>
+                        <p> Add to List</p>
+                    </div>
                   </div>
                </div>
             </div>
@@ -180,7 +185,10 @@ function getTvDetails() {
                         <p>  Homepage</p>
                        </div>
                    </div>
-                  
+                  <div class="add-div">
+                        <i class="fa fa-plus"></i>
+                        <p> Add to List</p>
+                    </div>
                 </div>
 
               </div>
@@ -262,6 +270,11 @@ function getAnimeDetails() {
                         <p>Trailer</p>
                        </div>
               </div>
+                <div class="add-div">
+                        <i class="fa fa-plus"></i>
+                        <p> Add to List</p>
+                    </div>
+
               </div>
             </div>
             </div>

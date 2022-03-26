@@ -6,37 +6,158 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="./css/myList.css">
-   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
    <title>MyWatchList - My List</title>
 </head>
 
 <body>
    <header>
-      <h1>MyWatchList</h1>
-      <nav class="nav-bar">
-         <ul>
-            <li>
-               <a href="./index.html">Movies & TV Shows</a>
-            </li>
-            <li>
-               <a href="./anime.html">Anime</a>
-            </li>
-            <li>
-               <a href="#">My List</a>
-            </li>
-         </ul>
-      </nav>
+      <div class="header-container">
+         <h1 class=" logo">MyWatchList</h1>
+         <nav class="nav-bar">
+            <img src="./img/icon-hamburger.svg" alt="" class="hamburger-icon">
+            <ul>
+               <li>
+                  <a href="./index.html">Movies</a>
+               </li>
+               <li>
+                  <a href="./tv.html">TV Shows</a>
+               </li>
+               <li>
+                  <a href="./anime.html">Anime</a>
+               </li>
+               <li>
+                  <a href="./about.html">About</a>
+               </li>
+               <li>
+                  <a href="#" class="current">My List</a>
+               </li>
+            </ul>
+         </nav>
+         <nav class="mobile-nav-bar">
+            <img src="./img/icon-close.svg" alt="" id="mobile-close-icon">
+            <h1 class="logo">MyWatchList</h1>
+            <ul>
+               <li>
+                  <a href="#">Movies</a>
+               </li>
+               <li>
+                  <a href="./tv.html">TV Shows</a>
+               </li>
+               <li>
+                  <a href="./anime.html">Anime</a>
+               </li>
+               <li>
+                  <a href="./about.html">About</a>
+               </li>
+               <li>
+                  <a href="./myList.html">My List</a>
+               </li>
+
+            </ul>
+         </nav>
+      </div>
+
    </header>
 
    <main>
+      <div class="main-wrapper">
+         <h1 class="title">My Lists</h1>
+         <div class="clear-div">
+            <button class="clear-btn">Clear Watched</button>
+         </div>
+         <section class="list-wrapper">
+            <div class="tabs-div">
+               <div class="tab movie-tab">
+                  <p>Movies</p>
+               </div>
+               <div class="tab tv-tab">
+                  <p>TV Shows</p>
+               </div>
+               <div class="tab anime-tab">
+                  <p>Animes</p>
+               </div>
+            </div>
+            <div class="list-container">
+               <div class="list movie-list">
+                  <div class="list-item movie-item">
+                     <div class="poster-div">
+                        <img src="./img/Dabbing chica.jpg" alt="" class="poster">
+                     </div>
+                     <div class="movie-title">
+                        <p>Uncharted</p>
+                     </div>
+                     <div class="watched-div">
+                        <i class="fa fa-check"></i>
+                     </div>
+                     <div class="delete-div">
+                        <i class="fa fa-trash"></i>
+                     </div>
+                  </div>
+                  <div class="list-item movie-item">
+                     <div class="poster-div">
+                        <img src="./img/Dabbing chica.jpg" alt="" class="poster">
+                     </div>
+                     <div class="movie-title">
+                        <p>Uncharted</p>
+                     </div>
+                     <div class="watched-div">
+                        <i class="fa fa-check"></i>
+                     </div>
+                     <div class="delete-div">
+                        <i class="fa fa-trash"></i>
+                     </div>
+                  </div>
+               </div>
+               <div class="list tv-list">
+                  <div class="list-item tv-item">
+                     <div class="poster-div">
+                        <img src="./img/Dabbing chica.jpg" alt="" class="poster">
+                     </div>
+                     <div class="tv-title">
+                        <p>Uncharted</p>
+                     </div>
+                     <div class="watched-div">
+                        <i class="fa fa-check"></i>
+                     </div>
+                     <div class="delete-div">
+                        <i class="fa fa-trash"></i>
+                     </div>
+                  </div>
 
+               </div>
+               <div class="list anime-list">
+
+                  <div class="list-item anime-item">
+                     <div class="poster-div">
+                        <img src="./img/Dabbing chica.jpg" alt="" class="poster">
+                     </div>
+                     <div class="anime-title">
+                        <p>Uncharted</p>
+                     </div>
+                     <div class="watched-div">
+                        <i class="fa fa-check"></i>
+                     </div>
+                     <div class="delete-div">
+                        <i class="fa fa-trash"></i>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+      </div>
+
+      </section>
 
 
    </main>
 
-   <footer class="footer"></footer>
-   <script src="./index.js"></script>
+   <footer class="footer">
+      <div class="copyright">© 2022 Jonathan Lee. All rights reserved.</div>
+   </footer>
+   <script src="./js/list.js"></script>
 </body>
 
 </html>
