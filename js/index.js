@@ -30,7 +30,6 @@ const ASIDE_API_URL =
 const SEARCH_API_URL = BASE_URL + "/search/movie?" + API_KEY;
 const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
-
 if (sessionStorage.getItem("movie-page")) {
   getMovies(sessionStorage.getItem("movie-page"));
 } else {
@@ -180,16 +179,17 @@ function displayMainMovies(data) {
           movieCard.classList.add("movie-card");
           movieCard.innerHTML = `
                   <div class="poster">
-                    <img src="${IMG_URL + poster_path}" alt="Image Unavailable">
+                    <img src="${IMG_URL + poster_path}" alt="${title} poster">
                   </div>
                   <div class="movie-info">
                     <h3 class="movie-title">${title}</h3>
-                    <p class="duration">${runtime + "m"}</p>
+                    <p class="duration">${checkNull(runtime) + "m"}</p>
                     <span class="dot"></span>
-                    <p class="release-year">${release_date.substring(0, 4)}</p>
-                    <p class="rating ${setColor(
-                      vote_average
-                    )}">${vote_average}</p>
+                    <p class="release-year">${checkNull(release_date).substring(
+                      0,
+                      4
+                    )}</p>
+                    <p class="rating ${setColor(vote_average)}">${checkNull(vote_average)}</p>
                   </div>
                   <div class="movie-overview">
                     <p class="blurb">${overview}</p>
@@ -242,4 +242,8 @@ function setColor(rating) {
   if (rating < 5) return "red";
   if (rating < 5.9 && rating > 4.9) return "orange";
   return "green";
+}
+function checkNull(data) {
+  if (data === null) return "Unknown";
+  return data;
 }

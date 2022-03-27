@@ -94,7 +94,7 @@ function getMovieDetails() {
                         <p>  Home Page</p>
                        </div>
                        <div class="links-item imdb-item"> 
-                        <img src="../img/imdb-icon.png">
+                        <img src="./img/imdb-icon.png">
                         <p>IMDB Page</p>
                        </div>
                    </div>
@@ -239,7 +239,7 @@ function getAnimeDetails() {
   fetch(`https://api.jikan.moe/v4/anime/${id}`)
     .then((res) => res.json())
     .then((obj) => {
-      // console.log(data);
+      console.log(obj);
       const image_path = obj.data.images.jpg.image_url;
       const backdropSource = obj.data.images.jpg.large_image_url;
       const trailer_path = obj.data.trailer.url;
@@ -254,8 +254,14 @@ function getAnimeDetails() {
         genres,
         type,
         url,
+        aired,
       } = obj.data;
-      // const productionNames=
+      let release_year = year;
+      console.log(aired.from);
+      if (release_year == null) {
+        release_year = aired.from.substring(0, 4);
+        console.log(release_year);
+      }
       mediaDetailsSection.innerHTML = `
             <div class="backdrop">
                <div class="backdrop-img-div">
@@ -270,22 +276,22 @@ function getAnimeDetails() {
                     <h2 class="media-title">${title}</h2>
               <div class="genre-wrapper">
               </div>
-              <p class="type detail">Type: ${checkInfo(type)}</p>
-              <p class="release-date detail">Released year: ${checkInfo(
-                year
+              <p class="type detail">Type: ${checkNull(type)}</p>
+              <p class="release-date detail">Released year: ${checkNull(
+                release_year
               )}</p>
               <p class="production detail">Producers: </p>
-              <p class="status detail">Status: ${checkInfo(status)}</p>
-              <p class="runtime detail">Episodes: ${checkInfo(episodes)}</p>
-              <p class="rating detail">MAL Rating: ${checkInfo(score)}</p>  
+              <p class="status detail">Status: ${checkNull(status)}</p>
+              <p class="runtime detail">Episodes: ${checkNull(episodes)}</p>
+              <p class="rating detail">MAL Rating: ${checkNull(score)}</p>  
 
               <div class="links-div">
                        <div class="links-item mal-item"> 
-                        <img src="../img/mal-icon.png">
+                        <img src="./img/mal-icon.png">
                         <p>  MAL Page</p>
                        </div>
                        <div class="links-item yt-item"> 
-                        <img src="../img/yt-icon.png">
+                        <img src="./img/yt-icon.png">
                         <p>Trailer</p>
                        </div>
               </div>
@@ -298,7 +304,7 @@ function getAnimeDetails() {
             </div>
             </div>
           <h3 class="overview-heading">Synopsis</h3>
-          <p class="overview">${checkInfo(synopsis)}</p>
+          <p class="overview">${checkNull(synopsis)}</p>
       `;
       const addBtn = document.querySelector(".add-div");
       addBtn.addEventListener("click", () => {
@@ -347,7 +353,7 @@ function displayProdCompanies(arr) {
   productionEl.innerHTML = productionEl.innerHTML.slice(0, -1);
 }
 
-function checkInfo(data) {
+function checkNull(data) {
   if (data === null) return "Unknown";
   return data;
 }

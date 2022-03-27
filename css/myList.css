@@ -15,6 +15,9 @@ Variables
   --Very-Dark-Gray: hsl(0, 0%, 41%);
   --Space-Blue: #2c365e;
   --Dark-Blue: #171d30;
+  --List-Item-Clr: rgb(0, 78, 146);
+  --List-Clr: #1e2d5e;
+  --Secondary-Yellow: rgb(160, 150, 17);
 }
 
 /* ===
@@ -155,7 +158,7 @@ header {
 /* Main */
 main {
   background-color: var(--Dark-Blue);
-  padding-top: 8em;
+  padding-top: 9em;
   /* height: 100vh; */
 }
 .main-wrapper {
@@ -165,7 +168,7 @@ main {
 }
 .title {
   font-size: 2rem;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 .clear-div {
   display: flex;
@@ -174,16 +177,21 @@ main {
 }
 .clear-btn {
   border-radius: 10px;
-  color: var(--White);
-  background-color: var(--Space-Blue);
+  background-color: var(--Dark-Blue);
+  color: var(--Secondary-Yellow);
+  border: 2px solid var(--Secondary-Yellow);
+}
+.fa-xmark {
+  font-size: 1rem;
+  margin-right: 0.3em;
 }
 .clear-btn:hover {
-  background-color: #85a2ff;
+  background-color: var(--Secondary-Yellow);
+  color: var(--Dark-Blue);
 }
 .tabs-div {
   display: flex;
   justify-content: space-between;
-  /* margin-bottom: 0.5em; */
 }
 .tab {
   width: 33%;
@@ -207,26 +215,23 @@ main {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-}
-.movie-list {
-  background-color: #05113a;
+  background-color: var(--List-Clr);
+  padding-top: 0.5em;
 }
 .tv-list {
-  background-color: #3a0533;
   display: none;
 }
 .anime-list {
-  background-color: #3a3505;
   display: none;
 }
 
-.movie-item,
-.tv-item,
-.anime-item {
+.list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(0, 78, 146);
+  background-color: var(--List-Item-Clr);
+  border-radius: 10px;
+  overflow: hidden;
 }
 .poster {
   width: 100%;
@@ -235,7 +240,7 @@ main {
 .poster-div {
   min-width: 6em;
   width: 6em;
-  height: calc(6em / 3 * 4);
+  height: calc(6em / 3 * 4.5);
 }
 .movie-title,
 .anime-title,
@@ -243,6 +248,13 @@ main {
   flex: 1;
   padding: 0.5em;
   font-size: 1.2rem;
+}
+@media (min-width: 1100px) {
+  .movie-title,
+  .anime-title,
+  .tv-title {
+    font-size: 1.4rem;
+  }
 }
 .watched-div,
 .delete-div {
@@ -268,9 +280,7 @@ main {
 .list-item {
   margin-bottom: 0.5em;
 }
-.movie-title {
-  /* max-width: 100px; */
-}
+
 .list.selected {
   display: inline-block;
 }
@@ -281,7 +291,7 @@ main {
 .list-item.watched p {
   text-decoration: line-through;
 }
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .list-container {
     display: flex;
     justify-content: space-between;
@@ -300,6 +310,18 @@ main {
   .tab.selected {
     background-color: var(--Space-Blue);
     font-weight: initial;
+  }
+  .movie-title,
+  .anime-title,
+  .tv-title {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 1300px) {
+  .movie-title,
+  .anime-title,
+  .tv-title {
+    font-size: 1.2rem;
   }
 }
 /* Footer */

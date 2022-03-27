@@ -177,18 +177,20 @@ function displayMainTvs(data) {
           tvCard.classList.add("tv-card");
           tvCard.innerHTML = `
                   <div class="poster">
-                    <img src="${IMG_URL + poster_path}" alt="Image Unavailable">
+                    <img src="${IMG_URL + poster_path}" alt="${name} poster">
                   </div>
                   <div class="tv-info">
                     <h3 class="tv-title">${name}</h3>
-                    <p class="duration">${number_of_seasons + " series"}</p>
+                    <p class="duration">${
+                      checkNull(number_of_seasons) + " series"
+                    }</p>
                     <span class="dot"></span>
-                    <p class="release-year">${checkInfo(
+                    <p class="release-year">${checkNull(
                       first_air_date
                     ).substring(0, 4)}</p>
-                    <p class="rating ${setColor(
-                      vote_average
-                    )}">${vote_average}</p>
+                    <p class="rating ${setColor(vote_average)}">${checkNull(
+            vote_average
+          )}</p>
                   </div>
                   <div class="tv-overview">
                     <p class="blurb">${overview}</p>
@@ -242,7 +244,7 @@ function setColor(rating) {
   if (rating < 5.9 && rating > 4.9) return "orange";
   return "green";
 }
-function checkInfo(data) {
+function checkNull(data) {
   if (data === null) return "Unknown";
   return data;
 }

@@ -52,7 +52,8 @@ navDownBtn.addEventListener("click", () => {
 });
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const searchTerm = searchBar.value;
+  const searchTerm = searchBar.value.replace(/\s/g, "%20");
+  console.log(searchTerm);
   if (searchTerm) {
     getAnimes(SEARCH_API_URL + searchTerm + "&limit=20");
   } else {
@@ -135,7 +136,7 @@ function getAnimes(url) {
         next.classList.remove("disabled");
       }
     })
-    .catch((err) => alert("getanimes " + err));
+    .catch((err) => alert("getAnimes " + err));
 }
 
 function getAsideAnimes(url) {
@@ -163,27 +164,34 @@ function displayMainAnimes(obj) {
     obj.forEach((anime) => {
       // const { mal_id } = anime;
       // Retrieve anime details for targeted anime
-      // console.log(anime);
       const image_path = anime.images.jpg.image_url;
-      const { mal_id, title, score, synopsis, year, episodes } = anime;
+      const { mal_id, title, score, synopsis, year, episodes, aired } = anime;
       // console.log(data.title);
+      let release_year = year;
+      if (release_year == null && aired) {
+        try {
+          release_year = aired.from.substring(0, 4);
+        } catch (error) {
+          alert(error);
+        }
+      }
       const animeCard = document.createElement("div");
       animeCard.classList.add("anime-card");
       animeCard.innerHTML = `
                   <div class="poster">
-                    <img src="${image_path}" alt="Image Unavailable">
+                    <img src="${image_path}" alt="${title} poster">
                   </div>
                   <div class="anime-info">
                     <h3 class="anime-title">${title}</h3>
-                    <p class="duration">${episodes + " ep"}</p>
+                    <p class="duration">${checkNullShort(episodes) + " ep"}</p>
                     <span class="dot"></span>
-                    <p class="release-year">${checkYear(year)}</p>
+                    <p class="release-year">${checkNull(release_year)}</p>
                     <p class="rating ${setColor(score)}">${checkScore(
         score
       )}</p>
                   </div>
                   <div class="anime-overview">
-                    <p class="blurb">${synopsis}</p>
+                    <p class="blurb">${checkNull(synopsis)}</p>
                     <a href="#">Click To See More</a>
                   </div>`;
       animeList.appendChild(animeCard);
@@ -230,8 +238,11 @@ function checkScore(score) {
   if (score === null) return "Unrated";
   return score;
 }
-
-function checkYear(year) {
-  if (year === null) return "N/A";
-  return year;
+function checkNullShort(data) {
+  if (data === null) return "N/A";
+  return data;
+}
+function checkNull(data) {
+  if (data === null) return "Unknown";
+  return data;
 }
