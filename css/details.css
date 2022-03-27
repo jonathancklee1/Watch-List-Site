@@ -225,6 +225,8 @@ header {
   padding: 1em;
   z-index: 98;
   cursor: pointer;
+  max-width: 500px;
+  margin: 0 auto;
 }
 .add-div i {
   margin-right: 1em;
@@ -241,6 +243,7 @@ header {
   /* width: 0; */
   /* max-width: 550px; */
   /* margin: 0 auto; */
+  flex-grow: 1;
 }
 
 .media-info {
@@ -318,7 +321,7 @@ header {
   border-radius: 10px;
   max-width: 11em;
   cursor: pointer;
-  margin-right: 0.3em;
+  margin-right: 0.5em;
   margin-bottom: 0.5em;
 }
 .links-item i {
@@ -356,7 +359,7 @@ header {
     /* margin-bottom: 3em; */
   }
   .poster-div {
-    width: 30%;
+    width: 40%;
     margin-right: 3em;
   }
   .links-div {

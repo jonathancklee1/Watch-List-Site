@@ -9,6 +9,7 @@ const IMG_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Function Invocation
 getDetails();
+
 // Event listeners
 hamburgerIcon.addEventListener("click", () => {
   mobileNav.classList.add("open");
@@ -17,6 +18,8 @@ hamburgerIcon.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
   mobileNav.classList.remove("open");
 });
+
+// Functions
 function getDetails() {
   if (localStorage.getItem("clicked") === "movie") {
     getMovieDetails();
@@ -105,7 +108,15 @@ function getMovieDetails() {
             <h3 class="overview-heading">Overview</h3>
             <p class="overview">${overview}</p>
       `;
-
+      const addBtn = document.querySelector(".add-div");
+      addBtn.addEventListener("click", () => {
+        console.log(title);
+        addToList("movieArr", {
+          title: title,
+          poster_path: IMG_URL + poster_path,
+          watched: false,
+        });
+      });
       const homeItem = document.querySelector(".home-item");
       homeItem.addEventListener("click", () => {
         window.open(homepage);
@@ -198,7 +209,15 @@ function getTvDetails() {
             <h3 class="overview-heading">Overview</h3>
             <p class="overview">${overview}</p>
       `;
-
+      const addBtn = document.querySelector(".add-div");
+      addBtn.addEventListener("click", () => {
+        console.log(name);
+        addToList("tvArr", {
+          title: name,
+          poster_path: IMG_URL + poster_path,
+          watched: false,
+        });
+      });
       const linksItem = document.querySelector(".links-item");
       linksItem.addEventListener("click", () => {
         window.open(homepage);
@@ -281,7 +300,15 @@ function getAnimeDetails() {
           <h3 class="overview-heading">Synopsis</h3>
           <p class="overview">${checkInfo(synopsis)}</p>
       `;
-
+      const addBtn = document.querySelector(".add-div");
+      addBtn.addEventListener("click", () => {
+        console.log(title);
+        addToList("animeArr", {
+          title: title,
+          poster_path: image_path,
+          watched: false,
+        });
+      });
       const malItem = document.querySelector(".mal-item");
       malItem.addEventListener("click", () => {
         window.open(url);
@@ -323,4 +350,20 @@ function displayProdCompanies(arr) {
 function checkInfo(data) {
   if (data === null) return "Unknown";
   return data;
+}
+
+function addToList(key, obj) {
+  if (localStorage.getItem(key) === null) {
+    localStorage.setItem(key, JSON.stringify([]));
+  }
+  // localStorage.getItem(key).push(obj)
+  const list = JSON.parse(localStorage.getItem(key));
+  for (i in list) {
+    if (list[i].title == obj.title) {
+      return alert("This item is already in your list");
+    }
+  }
+  list.push(obj);
+  localStorage.setItem(key, JSON.stringify(list));
+  alert("Item added to list");
 }
