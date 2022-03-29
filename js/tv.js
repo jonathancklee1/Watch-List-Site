@@ -121,11 +121,14 @@ function getTvs(url) {
       totalPages = data.total_pages;
       current.innerText = currentPage;
       // Enable/disable navigation button for pagination
-      if (currentPage <= 1) {
+      if (currentPage <= 1 && totalPages !== 0) {
         prev.classList.add("disabled");
         next.classList.remove("disabled");
-      } else if (currentPage >= totalPages) {
+      } else if (currentPage >= totalPages && totalPages !== 0) {
         prev.classList.remove("disabled");
+        next.classList.add("disabled");
+      } else if (currentPage <= 1 && totalPages === 0) {
+        prev.classList.add("disabled");
         next.classList.add("disabled");
       } else {
         prev.classList.remove("disabled");

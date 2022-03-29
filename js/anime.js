@@ -26,7 +26,12 @@ const SEARCH_API_URL = "https://api.jikan.moe/v4/anime?q=";
 
 // Function Invocation
 window.addEventListener("DOMContentLoaded", (event) => {
-  if (sessionStorage.getItem("anime-page")) {
+  let savedUrl = sessionStorage.getItem("anime-page");
+  if (savedUrl) {
+    let urlSplit = savedUrl.split("?");
+    let queryParams = urlSplit[1].split("&");
+    let pageParam = queryParams[queryParams.length - 1].split("=");
+    currentPage = pageParam[1];
     getAnimes(sessionStorage.getItem("anime-page"));
   } else {
     getAnimes(MAIN_URL);
@@ -53,9 +58,9 @@ navDownBtn.addEventListener("click", () => {
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const searchTerm = searchBar.value.replace(/\s/g, "%20");
-  console.log(searchTerm);
+  currentPage = 1;
   if (searchTerm) {
-    getAnimes(SEARCH_API_URL + searchTerm + "&limit=20");
+    getAnimes(SEARCH_API_URL + searchTerm);
   } else {
     getAnimes(BASE_URL);
   }
@@ -81,7 +86,7 @@ prev.addEventListener("click", () => {
 next.addEventListener("click", () => {
   if (nextPage <= totalPages) {
     callPage(nextPage);
-    currentPage += 1;
+    currentPage = +currentPage + 1;
   }
   animeListSection.scrollIntoView({
     behavior: "smooth",
@@ -92,18 +97,16 @@ next.addEventListener("click", () => {
 
 // Functions
 function callPage(page) {
-  console.log(page);
   let urlSplit = lastUrl.split("?");
-  console.log(lastUrl);
-  console.log(urlSplit);
-  let queryParams = urlSplit[1];
-  let pageParam = queryParams.split("=");
+  let queryParams = urlSplit[1].split("&");
+  let pageParam = queryParams[queryParams.length - 1].split("=");
   if (pageParam[0] != "page") {
     let url = lastUrl + "&page=" + page;
     sessionStorage.setItem("anime-page", url);
     getAnimes(url);
   } else {
     pageParam[1] = page.toString();
+    console.log(pageParam[1]);
     let key = pageParam.join("=");
     let url = urlSplit[0] + "?" + key;
     sessionStorage.setItem("anime-page", url);
@@ -111,7 +114,7 @@ function callPage(page) {
   }
 }
 
-// Retrieve animes from TMDB API
+// Retrieve animes from Jikan API
 function getAnimes(url) {
   lastUrl = url;
   fetch(url)
@@ -119,17 +122,22 @@ function getAnimes(url) {
     .then((data) => {
       console.log(data);
       displayMainAnimes(data.data);
-      // currentPage = data.page;
-      nextPage = currentPage + 1;
-      prevPage = currentPage - 1;
+      console.log("Curr" + currentPage);
+      console.log("next" + nextPage);
+      nextPage = +currentPage + 1;
+      prevPage = +currentPage - 1;
       totalPages = data.pagination.last_visible_page;
+      console.log(totalPages);
       current.innerText = currentPage;
       // Enable/disable navigation button for pagination
-      if (currentPage <= 1) {
+      if (currentPage <= 1 && totalPages !== 1) {
         prev.classList.add("disabled");
         next.classList.remove("disabled");
-      } else if (currentPage >= totalPages) {
+      } else if (currentPage >= totalPages && totalPages !== 1) {
         prev.classList.remove("disabled");
+        next.classList.add("disabled");
+      } else if (currentPage <= 1 && totalPages === 1) {
+        prev.classList.add("disabled");
         next.classList.add("disabled");
       } else {
         prev.classList.remove("disabled");
@@ -162,13 +170,11 @@ function displayMainAnimes(obj) {
     animeListSection.appendChild(errorDiv);
   } else {
     obj.forEach((anime) => {
-      // const { mal_id } = anime;
       // Retrieve anime details for targeted anime
       const image_path = anime.images.jpg.image_url;
       const { mal_id, title, score, synopsis, year, episodes, aired } = anime;
-      // console.log(data.title);
       let release_year = year;
-      if (release_year == null && aired) {
+      if (release_year === null && aired.from !== null) {
         try {
           release_year = aired.from.substring(0, 4);
         } catch (error) {

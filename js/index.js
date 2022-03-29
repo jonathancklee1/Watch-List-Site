@@ -59,7 +59,7 @@ searchBtn.addEventListener("click", (e) => {
   if (searchTerm) {
     getMovies(SEARCH_API_URL + "&query=" + searchTerm);
   } else {
-    getMovies(API_URL);
+    getMovies(MAIN_API_URL);
   }
   movieListSection.scrollIntoView({
     behavior: "smooth",
@@ -93,8 +93,10 @@ next.addEventListener("click", () => {
 // Functions
 function callPage(page) {
   let urlSplit = lastUrl.split("?");
+  console.log(urlSplit);
   let queryParams = urlSplit[1].split("&");
   let pageParam = queryParams[queryParams.length - 1].split("=");
+  console.log(pageParam);
   if (pageParam[0] != "page") {
     let url = lastUrl + "&page=" + page;
     sessionStorage.setItem("movie-page", url);
@@ -122,13 +124,17 @@ function getMovies(url) {
       nextPage = currentPage + 1;
       prevPage = currentPage - 1;
       totalPages = data.total_pages;
+      console.log(totalPages);
       current.innerText = currentPage;
       // Enable/disable navigation button for pagination
-      if (currentPage <= 1) {
+      if (currentPage <= 1 && totalPages !== 0) {
         prev.classList.add("disabled");
         next.classList.remove("disabled");
-      } else if (currentPage >= totalPages) {
+      } else if (currentPage >= totalPages && totalPages !== 0) {
         prev.classList.remove("disabled");
+        next.classList.add("disabled");
+      } else if (currentPage <= 1 && totalPages === 0) {
+        prev.classList.add("disabled");
         next.classList.add("disabled");
       } else {
         prev.classList.remove("disabled");
@@ -189,7 +195,9 @@ function displayMainMovies(data) {
                       0,
                       4
                     )}</p>
-                    <p class="rating ${setColor(vote_average)}">${checkNull(vote_average)}</p>
+                    <p class="rating ${setColor(vote_average)}">${checkNull(
+            vote_average
+          )}</p>
                   </div>
                   <div class="movie-overview">
                     <p class="blurb">${overview}</p>

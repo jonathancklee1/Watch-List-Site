@@ -257,10 +257,13 @@ function getAnimeDetails() {
         aired,
       } = obj.data;
       let release_year = year;
-      console.log(aired.from);
-      if (release_year == null) {
-        release_year = aired.from.substring(0, 4);
-        console.log(release_year);
+      // console.log(aired.from);
+      if (release_year === null && aired.from !== null) {
+        try {
+          release_year = aired.from.substring(0, 4);
+        } catch (error) {
+          alert(error);
+        }
       }
       mediaDetailsSection.innerHTML = `
             <div class="backdrop">
