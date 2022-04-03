@@ -2,6 +2,7 @@ const closeBtn = document.getElementById("mobile-close-icon");
 const mobileNav = document.querySelector(".mobile-nav-bar");
 const hamburgerIcon = document.querySelector(".hamburger-icon");
 const mediaDetailsSection = document.querySelector(".media-details");
+const toast = document.querySelector(".toast");
 
 const API_KEY = "api_key=42c15f29217106b8f3f7867104c1fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -338,6 +339,7 @@ function getAnimeDetails() {
       alert("Detail error " + err);
     });
 }
+
 function displayGenres(arr) {
   const genreWrapper = document.querySelector(".genre-wrapper");
   for (genre in arr) {
@@ -348,6 +350,7 @@ function displayGenres(arr) {
     genreWrapper.appendChild(span);
   }
 }
+
 function displayProdCompanies(arr) {
   const productionEl = document.querySelector(".production");
   for (company in arr) {
@@ -369,10 +372,28 @@ function addToList(key, obj) {
   const list = JSON.parse(localStorage.getItem(key));
   for (i in list) {
     if (list[i].title == obj.title) {
-      return alert("This item is already in your list");
+      showToast("error");
+      return;
     }
   }
   list.push(obj);
   localStorage.setItem(key, JSON.stringify(list));
-  alert("Item added to list");
+  showToast("success");
+}
+
+function showToast(status) {
+  toast.classList.add("visible");
+  if (status == "success") {
+    toast.classList.add("success");
+    toast.innerHTML="Item added to list!"
+  } else {
+    toast.classList.add("error");
+    toast.innerHTML="Item already in list!";
+  }
+
+  setTimeout(() => {
+    toast.classList.remove("visible");
+    toast.classList.remove("success");
+    toast.classList.remove("error");
+  }, 3000);
 }

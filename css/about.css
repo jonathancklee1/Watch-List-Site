@@ -83,7 +83,9 @@ header {
   margin: 0 auto;
   padding: 2em 0;
 }
-
+.logo {
+  cursor: pointer;
+}
 .nav-bar ul {
   display: none;
   align-items: center;
@@ -91,9 +93,11 @@ header {
 }
 
 .nav-bar ul a:hover,
-.nav-bar ul a:focus {
-  border-bottom: 2px solid white;
+.nav-bar ul a:focus,
+.current {
+  border-bottom: 2px solid var(--White);
 }
+
 .hamburger-icon {
   display: block;
 }
