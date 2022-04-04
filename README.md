@@ -7,7 +7,7 @@ Using APIs from [The Movie Database](https://www.themoviedb.org/), for movies an
 
 The project is built using front-end technologies only, so there is currently no cross-device list storing function in place as the lists are cached in local storage. This might be a future implemeentation for back-end incorporation that allows saving across different devices.
 
-## Features
+### Features
 
 * Displays popular media items
 * Search functionality
@@ -25,7 +25,7 @@ The project is built using front-end technologies only, so there is currently no
 
 ## Getting Started
 
-## Live Site: 
+### Live Site: 
 https://jonathancklee1.github.io/Watch-List-Site/
 
 ## Acknowledgments
